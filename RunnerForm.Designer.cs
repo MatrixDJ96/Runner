@@ -62,6 +62,7 @@ namespace Runner
             this.FileToExecuteLabel.TabIndex = 0;
             this.FileToExecuteLabel.Text = "FileToExecute";
             this.FileToExecuteLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.FileToExecuteLabel.Click += new System.EventHandler(this.FileToExecuteLabel_Click);
             // 
             // FillPanel
             // 
@@ -109,6 +110,7 @@ namespace Runner
             this.StartButton.TabIndex = 0;
             this.StartButton.Text = "Start";
             this.StartButton.UseVisualStyleBackColor = true;
+            this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
             // StopButton
             // 
@@ -121,6 +123,7 @@ namespace Runner
             this.StopButton.TabIndex = 1;
             this.StopButton.Text = "Stop";
             this.StopButton.UseVisualStyleBackColor = true;
+            this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
             // 
             // RunnerForm
             // 
@@ -133,6 +136,7 @@ namespace Runner
             this.Name = "RunnerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Runner";
+            this.Load += new System.EventHandler(this.RunnerForm_Load);
             this.TopPanel.ResumeLayout(false);
             this.TopPanel.PerformLayout();
             this.FillPanel.ResumeLayout(false);
