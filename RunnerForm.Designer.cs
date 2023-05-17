@@ -133,6 +133,7 @@ namespace Runner
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.FillPanel);
             this.Controls.Add(this.TopPanel);
+            this.MinimumSize = new System.Drawing.Size(400, 200);
             this.Name = "RunnerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Runner";
