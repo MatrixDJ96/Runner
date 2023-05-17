@@ -54,5 +54,28 @@ namespace Runner
                 OutputTextBox.Text += output;
             }
         }
+
+        private bool SelectNewFileToExecute()
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.RestoreDirectory = true;
+                openFileDialog.DereferenceLinks = false;
+                openFileDialog.Title = "Seleziona il file da eseguire";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Get the path of specified file
+                    Settings.FileToExecute = openFileDialog.FileName;
+
+                    // Save new settings
+                    Settings.Save();
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }
