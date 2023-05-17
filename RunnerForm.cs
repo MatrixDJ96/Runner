@@ -31,5 +31,28 @@ namespace Runner
             FileToExecuteLabel.Text = Settings.FileToExecute;
             FileToExecuteLabel.Enabled = StartButton.Enabled;
         }
+
+        private void UpdateOutputText(bool clean, string output, bool error)
+        {
+            if (InvokeRequired)
+            {
+                // Invoke correct thread to update gui
+                Invoke((MethodInvoker)delegate { UpdateOutputText(clean, output, error); });
+
+                return;
+            }
+
+            if (clean)
+            {
+                // Clean previous output
+                OutputTextBox.Clear();
+            }
+
+            if (!output.IsEmpty())
+            {
+                // Append new output
+                OutputTextBox.Text += output;
+            }
+        }
     }
 }
