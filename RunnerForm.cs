@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Runner
@@ -57,8 +58,11 @@ namespace Runner
 
             if (!output.IsEmpty())
             {
+                // Set output color
+                OutputTextBox.SelectionColor = error ? Color.Red : Color.Black;
+
                 // Append new output
-                OutputTextBox.Text += output;
+                OutputTextBox.SelectedText = output;
             }
         }
 
