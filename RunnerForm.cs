@@ -11,6 +11,13 @@ namespace Runner
         public RunnerForm()
         {
             InitializeComponent();
+
+            // Set event listner
+            ProcessHelper.Started += (s, e) => Process_Execution(s, e, true);
+            ProcessHelper.Exited += (s, e) => Process_Execution(s, e, false);
+
+            ProcessHelper.ErrorDataReceived += (s, e) => Process_Output(s, e, true);
+            ProcessHelper.OutputDataReceived += (s, e) => Process_Output(s, e, false);
         }
 
         private void UpdateComponents()
@@ -32,7 +39,7 @@ namespace Runner
             FileToExecuteLabel.Enabled = StartButton.Enabled;
         }
 
-        private void UpdateOutputText(bool clean, string output, bool error)
+        private void UpdateOutputText(bool clean, string output = null, bool error = false)
         {
             if (InvokeRequired)
             {
@@ -76,6 +83,81 @@ namespace Runner
             }
 
             return false;
+        }
+
+        private void Process_Execution(object sender, EventArgs e, bool clean)
+        {
+            UpdateComponents();
+            UpdateOutputText(clean);
+        }
+
+        private void Process_Output(object sender, DataReceivedEventArgs e, bool error)
+        {
+            UpdateOutputText(false, e.Data + Environment.NewLine, error);
+        }
+
+        private void RunnerForm_Load(object sender, EventArgs e)
+        {
+
+            // Load settings
+            Settings.Load();
+
+            // Check if file to execute are set
+            if (Settings.FileToExecute.IsEmpty())
+            {
+                // Select new file to execute
+                if (!SelectNewFileToExecute())
+                {
+                    // If no file to execute exit from app
+                    Application.Exit();
+                }
+            }
+
+            // Update GUI
+            UpdateComponents();
+            UpdateOutputText(true);
+        }
+
+        private void FileToExecuteLabel_Click(object sender, EventArgs e)
+        {
+            // Select new file to execute
+            if (SelectNewFileToExecute())
+            {
+                UpdateComponents();
+            }
+        }
+
+        private void StartButton_Click(object sender, EventArgs e)
+        {
+            // Check if file to execute are set
+            if (!Settings.FileToExecute.IsEmpty())
+            {
+                // Check if process is running
+                if (!ProcessHelper.IsRunning)
+                {
+                    // Create process
+                    ProcessHelper.Create(Settings.FileToExecute);
+
+                    // Start process
+                    if (!ProcessHelper.Start())
+                    {
+                        MessageBox.Show("Impossibile avviare il processo", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void StopButton_Click(object sender, EventArgs e)
+        {
+            // Check if process is running
+            if (ProcessHelper.IsRunning)
+            {
+                // Stop process
+                if (!ProcessHelper.Kill())
+                {
+                    MessageBox.Show("Impossibile interrompere il processo", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }
