@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
@@ -10,6 +10,8 @@ namespace Runner
         public Process Process { get; private set; } = null;
 
         public bool IsRunning { get => !(Process?.HasExited ?? true); }
+
+        public string LastError { get; private set; } = "";
 
         // Event on process started
         public event EventHandler Started;
@@ -82,10 +84,15 @@ namespace Runner
             {
                 try
                 {
+                    LastError = "";
                     Process.Start();
                     result = true;
                 }
-                catch { }
+                catch (Exception e)
+                {
+                    Process = null;
+                    LastError = e.Message;
+                }
 
                 if (result)
                 {
@@ -113,7 +120,10 @@ namespace Runner
                     Process = null;
                     result = true;
                 }
-                catch { }
+                catch (Exception e)
+                {
+                    LastError = e.Message;
+                }
             }
 
             return result;
