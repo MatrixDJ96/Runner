@@ -184,7 +184,8 @@ namespace Runner
                     // Start process
                     if (!ProcessHelper.Start())
                     {
-                        MessageBox.Show("Impossibile avviare il processo", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        var error = Environment.NewLine + Environment.NewLine + ProcessHelper.LastError;
+                        MessageBox.Show(("Impossibile avviare il processo!" + error).Trim(), "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -198,7 +199,8 @@ namespace Runner
                 // Stop process
                 if (!ProcessHelper.Kill())
                 {
-                    MessageBox.Show("Impossibile interrompere il processo", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    var error = Environment.NewLine + Environment.NewLine + ProcessHelper.LastError;
+                    MessageBox.Show(("Impossibile interrompere il processo!" + error).Trim(), "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
