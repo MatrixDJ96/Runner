@@ -30,6 +30,20 @@ namespace Runner
             DefaultFileToExecuteText = ExecutableLabel.Text;
         }
 
+        ~RunnerForm()
+        {
+            try
+            {
+                // Check if process is running
+                if (ProcessHelper.IsRunning)
+                {
+                    // Stop process
+                    ProcessHelper.Kill();
+                }
+            }
+            catch { }
+        }
+
         private void UpdateComponents()
         {
             if (InvokeRequired)
