@@ -12,7 +12,7 @@ namespace Runner
         public static int LocationX { get; set; } = 0;
         public static int LocationY { get; set; } = 0;
 
-        public static string FileToExecute { get; set; } = "";
+        public static string Executable { get; set; } = "";
         public static string Arguments { get; set; } = "";
 
         public static bool Save(bool clean = true)
@@ -47,7 +47,7 @@ namespace Runner
                         stream.WriteLine(nameof(SizeHeight) + "=" + SizeHeight);
                         stream.WriteLine(nameof(LocationX) + "=" + LocationX);
                         stream.WriteLine(nameof(LocationY) + "=" + LocationY);
-                        stream.WriteLine(nameof(FileToExecute) + "=" + FileToExecute);
+                        stream.WriteLine(nameof(Executable) + "=" + Executable);
                         stream.WriteLine(nameof(Arguments) + "=" + Arguments);
                     }
                 }
@@ -104,9 +104,9 @@ namespace Runner
                                 // Set form y position
                                 LocationY = int.Parse(value.Trim());
                                 break;
-                            case nameof(FileToExecute):
+                            case nameof(Executable):
                                 // Set file to execute
-                                FileToExecute = value.Trim();
+                                Executable = value.Trim();
                                 break;
                             case nameof(Arguments):
                                 // Set file to execute
@@ -134,7 +134,7 @@ namespace Runner
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     // Get the path of specified file
-                    FileToExecute = openFileDialog.FileName;
+                    Executable = openFileDialog.FileName;
 
                     if (save)
                     {

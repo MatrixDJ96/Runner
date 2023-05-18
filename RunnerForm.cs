@@ -27,7 +27,7 @@ namespace Runner
             Icon = Icon.ExtractAssociatedIcon(Program.ExecutablePath);
 
             // Set default text of file to execute label
-            DefaultFileToExecuteText = FileToExecuteLabel.Text;
+            DefaultFileToExecuteText = ExecutableLabel.Text;
         }
 
         private void UpdateComponents()
@@ -41,12 +41,12 @@ namespace Runner
             }
 
             // Update start and stop button
-            StartButton.Enabled = !Settings.FileToExecute.IsEmpty() && !ProcessHelper.IsRunning;
-            StopButton.Enabled = !Settings.FileToExecute.IsEmpty() && ProcessHelper.IsRunning;
+            StartButton.Enabled = !Settings.Executable.IsEmpty() && !ProcessHelper.IsRunning;
+            StopButton.Enabled = !Settings.Executable.IsEmpty() && ProcessHelper.IsRunning;
 
             // Update file to execute label
-            FileToExecuteLabel.Text = !Settings.FileToExecute.IsEmpty() ? (Settings.FileToExecute + " " +  Settings.Arguments).Trim() : DefaultFileToExecuteText;
-            FileToExecuteLabel.Enabled = Settings.FileToExecute.IsEmpty() || StartButton.Enabled;
+            ExecutableLabel.Text = !Settings.Executable.IsEmpty() ? (Settings.Executable + " " +  Settings.Arguments).Trim() : DefaultFileToExecuteText;
+            ExecutableLabel.Enabled = Settings.Executable.IsEmpty() || StartButton.Enabled;
         }
 
         private void UpdateOutputText(bool clean, string output = null, bool error = false)
@@ -145,13 +145,13 @@ namespace Runner
         private void StartButton_Click(object sender, EventArgs e)
         {
             // Check if file to execute are set
-            if (!Settings.FileToExecute.IsEmpty())
+            if (!Settings.Executable.IsEmpty())
             {
                 // Check if process is running
                 if (!ProcessHelper.IsRunning)
                 {
                     // Create process
-                    ProcessHelper.Create(Settings.FileToExecute, Settings.Arguments);
+                    ProcessHelper.Create(Settings.Executable, Settings.Arguments);
 
                     // Start process
                     if (!ProcessHelper.Start())

@@ -29,7 +29,7 @@ namespace Runner
         private void InitializeComponent()
         {
             this.TopPanel = new System.Windows.Forms.Panel();
-            this.FileToExecuteLabel = new System.Windows.Forms.Label();
+            this.ExecutableLabel = new System.Windows.Forms.Label();
             this.FillPanel = new System.Windows.Forms.Panel();
             this.OutputTextBox = new System.Windows.Forms.RichTextBox();
             this.RightPanel = new System.Windows.Forms.FlowLayoutPanel();
@@ -43,7 +43,7 @@ namespace Runner
             // TopPanel
             // 
             this.TopPanel.AutoSize = true;
-            this.TopPanel.Controls.Add(this.FileToExecuteLabel);
+            this.TopPanel.Controls.Add(this.ExecutableLabel);
             this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.TopPanel.Location = new System.Drawing.Point(0, 0);
             this.TopPanel.Name = "TopPanel";
@@ -51,21 +51,21 @@ namespace Runner
             this.TopPanel.Size = new System.Drawing.Size(800, 31);
             this.TopPanel.TabIndex = 0;
             // 
-            // FileToExecuteLabel
+            // ExecutableLabel
             // 
-            this.FileToExecuteLabel.AutoSize = true;
-            this.FileToExecuteLabel.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.FileToExecuteLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.FileToExecuteLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.FileToExecuteLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FileToExecuteLabel.Location = new System.Drawing.Point(5, 5);
-            this.FileToExecuteLabel.Name = "FileToExecuteLabel";
-            this.FileToExecuteLabel.Padding = new System.Windows.Forms.Padding(3);
-            this.FileToExecuteLabel.Size = new System.Drawing.Size(223, 21);
-            this.FileToExecuteLabel.TabIndex = 0;
-            this.FileToExecuteLabel.Text = "Clicca qui per selezionare un file da eseguire";
-            this.FileToExecuteLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.FileToExecuteLabel.Click += new System.EventHandler(this.FileToExecuteLabel_Click);
+            this.ExecutableLabel.AutoSize = true;
+            this.ExecutableLabel.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ExecutableLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ExecutableLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ExecutableLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ExecutableLabel.Location = new System.Drawing.Point(5, 5);
+            this.ExecutableLabel.Name = "ExecutableLabel";
+            this.ExecutableLabel.Padding = new System.Windows.Forms.Padding(3);
+            this.ExecutableLabel.Size = new System.Drawing.Size(216, 21);
+            this.ExecutableLabel.TabIndex = 0;
+            this.ExecutableLabel.Text = "Clicca qui per selezionare un file eseguibile";
+            this.ExecutableLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ExecutableLabel.Click += new System.EventHandler(this.FileToExecuteLabel_Click);
             // 
             // FillPanel
             // 
@@ -156,7 +156,7 @@ namespace Runner
         #endregion
 
         private System.Windows.Forms.Panel TopPanel;
-        private System.Windows.Forms.Label FileToExecuteLabel;
+        private System.Windows.Forms.Label ExecutableLabel;
         private System.Windows.Forms.Panel FillPanel;
         private System.Windows.Forms.RichTextBox OutputTextBox;
         private System.Windows.Forms.FlowLayoutPanel RightPanel;
