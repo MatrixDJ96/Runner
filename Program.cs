@@ -11,9 +11,10 @@ namespace Runner
 
         // Full path of the program settings
         public static string SettingsPath = Path.Combine(
-            Path.GetDirectoryName(ExecutablePath),
-            Path.GetFileNameWithoutExtension(ExecutablePath)
-        ) + ".ini";
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            System.Reflection.Assembly.GetExecutingAssembly().GetName().Name,
+            "Settings.ini"
+        );
 
         /// <summary>
         /// Punto di ingresso principale dell'applicazione.
