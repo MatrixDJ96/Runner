@@ -19,6 +19,9 @@ namespace Runner
 
             ProcessHelper.ErrorDataReceived += (s, e) => Process_Output(s, e, true);
             ProcessHelper.OutputDataReceived += (s, e) => Process_Output(s, e, false);
+
+            // Set application icon to form
+            Icon = Icon.ExtractAssociatedIcon(Program.ExecutablePath);
         }
 
         private void UpdateComponents()
