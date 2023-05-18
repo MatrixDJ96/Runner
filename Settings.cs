@@ -20,6 +20,13 @@ namespace Runner
                     File.Delete(Program.SettingsPath);
                 }
 
+                var dir = Path.GetDirectoryName(Program.SettingsPath);
+
+                if (!Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+
                 // Create a new configuration file with default settings
                 using (var stream = File.CreateText(Program.SettingsPath))
                 {
