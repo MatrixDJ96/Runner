@@ -28,7 +28,7 @@ namespace Runner
             }
 
             // Update file to execute textbox value
-            FileToExecuteTextBox.Text = Settings.FileToExecute;
+            ExecutableTextBox.Text = Settings.Executable;
             ArgumentTextBox.Text = Settings.Arguments;
 
             if (width)
@@ -49,7 +49,7 @@ namespace Runner
             }
 
             // Update file to execute textbox width
-            FileToExecuteTextBox.Width = Math.Max(TextRenderer.MeasureText(FileToExecuteTextBox.Text, FileToExecuteTextBox.Font).Width, 200);
+            ExecutableTextBox.Width = Math.Max(TextRenderer.MeasureText(ExecutableTextBox.Text, ExecutableTextBox.Font).Width, 200);
             ArgumentTextBox.Width = Math.Max(TextRenderer.MeasureText(ArgumentTextBox.Text, ArgumentTextBox.Font).Width, 200);
         }
 
@@ -77,7 +77,7 @@ namespace Runner
             UpdateComponentsWidth();
 
             // Update file to execute setting
-            Settings.FileToExecute = FileToExecuteTextBox.Text;
+            Settings.Executable = ExecutableTextBox.Text;
         }
 
         private void ArgumentTextBox_TextChanged(object sender, EventArgs e)

@@ -29,8 +29,8 @@ namespace Runner
         private void InitializeComponent()
         {
             this.ListPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.FileToExecuteLabel = new System.Windows.Forms.Label();
-            this.FileToExecuteTextBox = new System.Windows.Forms.TextBox();
+            this.ExecutableLabel = new System.Windows.Forms.Label();
+            this.ExecutableTextBox = new System.Windows.Forms.TextBox();
             this.ArgumentLabel = new System.Windows.Forms.Label();
             this.ArgumentTextBox = new System.Windows.Forms.TextBox();
             this.SaveButton = new System.Windows.Forms.Button();
@@ -46,8 +46,8 @@ namespace Runner
             this.ListPanel.ColumnCount = 2;
             this.ListPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.ListPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.ListPanel.Controls.Add(this.FileToExecuteLabel, 0, 0);
-            this.ListPanel.Controls.Add(this.FileToExecuteTextBox, 1, 0);
+            this.ListPanel.Controls.Add(this.ExecutableLabel, 0, 0);
+            this.ListPanel.Controls.Add(this.ExecutableTextBox, 1, 0);
             this.ListPanel.Controls.Add(this.ArgumentLabel, 0, 2);
             this.ListPanel.Controls.Add(this.ArgumentTextBox, 1, 2);
             this.ListPanel.Location = new System.Drawing.Point(3, 3);
@@ -57,33 +57,33 @@ namespace Runner
             this.ListPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.ListPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.ListPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.ListPanel.Size = new System.Drawing.Size(311, 72);
+            this.ListPanel.Size = new System.Drawing.Size(285, 72);
             this.ListPanel.TabIndex = 0;
             // 
-            // FileToExecuteLabel
+            // ExecutableLabel
             // 
-            this.FileToExecuteLabel.AutoSize = true;
-            this.FileToExecuteLabel.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.FileToExecuteLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.FileToExecuteLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.FileToExecuteLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FileToExecuteLabel.Location = new System.Drawing.Point(8, 5);
-            this.FileToExecuteLabel.Name = "FileToExecuteLabel";
-            this.FileToExecuteLabel.Padding = new System.Windows.Forms.Padding(3);
-            this.FileToExecuteLabel.Size = new System.Drawing.Size(89, 26);
-            this.FileToExecuteLabel.TabIndex = 0;
-            this.FileToExecuteLabel.Text = "File da eseguire";
-            this.FileToExecuteLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.FileToExecuteLabel.Click += new System.EventHandler(this.FileToExecuteTextBox_Click);
+            this.ExecutableLabel.AutoSize = true;
+            this.ExecutableLabel.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ExecutableLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ExecutableLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ExecutableLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ExecutableLabel.Location = new System.Drawing.Point(8, 5);
+            this.ExecutableLabel.Name = "ExecutableLabel";
+            this.ExecutableLabel.Padding = new System.Windows.Forms.Padding(3);
+            this.ExecutableLabel.Size = new System.Drawing.Size(63, 26);
+            this.ExecutableLabel.TabIndex = 0;
+            this.ExecutableLabel.Text = "Eseguibile";
+            this.ExecutableLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ExecutableLabel.Click += new System.EventHandler(this.FileToExecuteTextBox_Click);
             // 
-            // FileToExecuteTextBox
+            // ExecutableTextBox
             // 
-            this.FileToExecuteTextBox.Dock = System.Windows.Forms.DockStyle.Left;
-            this.FileToExecuteTextBox.Location = new System.Drawing.Point(103, 8);
-            this.FileToExecuteTextBox.Name = "FileToExecuteTextBox";
-            this.FileToExecuteTextBox.Size = new System.Drawing.Size(200, 20);
-            this.FileToExecuteTextBox.TabIndex = 1;
-            this.FileToExecuteTextBox.TextChanged += new System.EventHandler(this.FileToExecuteTextBox_TextChanged);
+            this.ExecutableTextBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ExecutableTextBox.Location = new System.Drawing.Point(77, 8);
+            this.ExecutableTextBox.Name = "ExecutableTextBox";
+            this.ExecutableTextBox.Size = new System.Drawing.Size(200, 20);
+            this.ExecutableTextBox.TabIndex = 1;
+            this.ExecutableTextBox.TextChanged += new System.EventHandler(this.FileToExecuteTextBox_TextChanged);
             // 
             // ArgumentLabel
             // 
@@ -94,7 +94,7 @@ namespace Runner
             this.ArgumentLabel.Location = new System.Drawing.Point(8, 41);
             this.ArgumentLabel.Name = "ArgumentLabel";
             this.ArgumentLabel.Padding = new System.Windows.Forms.Padding(3);
-            this.ArgumentLabel.Size = new System.Drawing.Size(89, 26);
+            this.ArgumentLabel.Size = new System.Drawing.Size(63, 26);
             this.ArgumentLabel.TabIndex = 2;
             this.ArgumentLabel.Text = "Argomenti";
             this.ArgumentLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -102,7 +102,7 @@ namespace Runner
             // ArgumentTextBox
             // 
             this.ArgumentTextBox.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ArgumentTextBox.Location = new System.Drawing.Point(103, 44);
+            this.ArgumentTextBox.Location = new System.Drawing.Point(77, 44);
             this.ArgumentTextBox.Name = "ArgumentTextBox";
             this.ArgumentTextBox.Size = new System.Drawing.Size(200, 20);
             this.ArgumentTextBox.TabIndex = 3;
@@ -159,8 +159,8 @@ namespace Runner
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel ListPanel;
-        private System.Windows.Forms.Label FileToExecuteLabel;
-        private System.Windows.Forms.TextBox FileToExecuteTextBox;
+        private System.Windows.Forms.Label ExecutableLabel;
+        private System.Windows.Forms.TextBox ExecutableTextBox;
         private System.Windows.Forms.Label ArgumentLabel;
         private System.Windows.Forms.TextBox ArgumentTextBox;
         private System.Windows.Forms.Button SaveButton;
