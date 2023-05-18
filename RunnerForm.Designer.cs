@@ -63,7 +63,7 @@ namespace Runner
             this.FileToExecuteLabel.Padding = new System.Windows.Forms.Padding(3);
             this.FileToExecuteLabel.Size = new System.Drawing.Size(223, 21);
             this.FileToExecuteLabel.TabIndex = 0;
-            this.FileToExecuteLabel.Text = "Clicca qui per selezionale un file da eseguire";
+            this.FileToExecuteLabel.Text = "Clicca qui per selezionare un file da eseguire";
             this.FileToExecuteLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.FileToExecuteLabel.Click += new System.EventHandler(this.FileToExecuteLabel_Click);
             // 

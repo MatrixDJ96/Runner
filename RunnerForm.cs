@@ -7,6 +7,9 @@ namespace Runner
 {
     public partial class RunnerForm : Form
     {
+        private string DefaultFileToExecuteText { get; set; } = "";
+
+        private SettingsForm SettingsForm { get; set; } = new SettingsForm();
         private ProcessHelper ProcessHelper { get; set; } = new ProcessHelper();
 
         public RunnerForm()
@@ -22,6 +25,9 @@ namespace Runner
 
             // Set application icon to form
             Icon = Icon.ExtractAssociatedIcon(Program.ExecutablePath);
+
+            // Set default text of file to execute label
+            DefaultFileToExecuteText = FileToExecuteLabel.Text;
         }
 
         private void UpdateComponents()
@@ -39,7 +45,7 @@ namespace Runner
             StopButton.Enabled = !Settings.FileToExecute.IsEmpty() && ProcessHelper.IsRunning;
 
             // Update file to execute label
-            FileToExecuteLabel.Text = !Settings.FileToExecute.IsEmpty() ? Settings.FileToExecute : FileToExecuteLabel.Text;
+            FileToExecuteLabel.Text = !Settings.FileToExecute.IsEmpty() ? Settings.FileToExecute : DefaultFileToExecuteText;
             FileToExecuteLabel.Enabled = Settings.FileToExecute.IsEmpty() || StartButton.Enabled;
         }
 
@@ -109,17 +115,6 @@ namespace Runner
             // Bring to front
             BringToFront();
 
-            // Check if file to execute are set
-            if (Settings.FileToExecute.IsEmpty())
-            {
-                // Select new file to execute
-                if (!Settings.SelectFileToExecute())
-                {
-                    // If no file to execute exit from app
-                    MessageBox.Show("È necessario selezionare un file da eseguire", "Informazione", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-
             // Update GUI
             UpdateComponents();
             UpdateOutputText(true);
@@ -141,7 +136,7 @@ namespace Runner
         private void FileToExecuteLabel_Click(object sender, EventArgs e)
         {
             // Select new file to execute
-            if (Settings.SelectFileToExecute())
+            if (SettingsForm.ShowDialog(this) == DialogResult.OK)
             {
                 UpdateComponents();
             }
