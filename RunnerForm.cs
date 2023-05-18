@@ -45,7 +45,7 @@ namespace Runner
             StopButton.Enabled = !Settings.FileToExecute.IsEmpty() && ProcessHelper.IsRunning;
 
             // Update file to execute label
-            FileToExecuteLabel.Text = !Settings.FileToExecute.IsEmpty() ? Settings.FileToExecute : DefaultFileToExecuteText;
+            FileToExecuteLabel.Text = !Settings.FileToExecute.IsEmpty() ? (Settings.FileToExecute + " " +  Settings.Arguments).Trim() : DefaultFileToExecuteText;
             FileToExecuteLabel.Enabled = Settings.FileToExecute.IsEmpty() || StartButton.Enabled;
         }
 
