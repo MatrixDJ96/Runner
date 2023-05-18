@@ -34,7 +34,7 @@ namespace Runner
             }
         }
 
-        public Process Create(string file)
+        public Process Create(string file, string arguments)
         {
             if (Process == null)
             {
@@ -49,8 +49,8 @@ namespace Runner
                 {
                     StartInfo = new ProcessStartInfo
                     {
-                        FileName = "cmd.exe",
-                        Arguments = "/c " + file,
+                        FileName = file,
+                        Arguments = arguments,
                         WorkingDirectory = workingDir,
                         UseShellExecute = false,
                         RedirectStandardOutput = true,

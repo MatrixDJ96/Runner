@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Windows.Forms;
 
 namespace Runner
@@ -13,6 +13,7 @@ namespace Runner
         public static int LocationY { get; set; } = 0;
 
         public static string FileToExecute { get; set; } = "";
+        public static string Arguments { get; set; } = "";
 
         public static bool Save(bool clean = true)
         {
@@ -47,6 +48,7 @@ namespace Runner
                         stream.WriteLine(nameof(LocationX) + "=" + LocationX);
                         stream.WriteLine(nameof(LocationY) + "=" + LocationY);
                         stream.WriteLine(nameof(FileToExecute) + "=" + FileToExecute);
+                        stream.WriteLine(nameof(Arguments) + "=" + Arguments);
                     }
                 }
 
@@ -105,6 +107,10 @@ namespace Runner
                             case nameof(FileToExecute):
                                 // Set file to execute
                                 FileToExecute = value.Trim();
+                                break;
+                            case nameof(Arguments):
+                                // Set file to execute
+                                Arguments = value.Trim();
                                 break;
                         }
                     }
