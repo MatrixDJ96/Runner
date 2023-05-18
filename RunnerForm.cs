@@ -108,6 +108,27 @@ namespace Runner
             // Load settings
             Settings.Load();
 
+            if (!Settings.FirstRun)
+            {
+                // Apply saved location
+                Location = new Point(
+                    Settings.LocationX,
+                    Settings.LocationY
+                );
+
+                // Apply saved size
+                Size = new Size(
+                    Settings.SizeWidth,
+                    Settings.SizeHeight
+                );
+            }
+            else
+            {
+                // Save default size and location
+                Settings.FirstRun = false;
+                RunnerForm_ResizeEnd(sender, e);
+            }
+
             // Bring to front
             BringToFront();
 
@@ -125,6 +146,19 @@ namespace Runner
             // Update GUI
             UpdateComponents();
             UpdateOutputText(true);
+        }
+
+        private void RunnerForm_ResizeEnd(object sender, EventArgs e)
+        {
+            // Get form size
+            Settings.SizeWidth = Size.Width;
+            Settings.SizeHeight = Size.Height;
+
+            // Get form location
+            Settings.LocationX = Location.X;
+            Settings.LocationY = Location.Y;
+
+            Settings.Save();
         }
 
         private void FileToExecuteLabel_Click(object sender, EventArgs e)
