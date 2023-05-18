@@ -36,8 +36,8 @@ namespace Runner
             StopButton.Enabled = !Settings.FileToExecute.IsEmpty() && ProcessHelper.IsRunning;
 
             // Update file to execute label
-            FileToExecuteLabel.Text = Settings.FileToExecute;
-            FileToExecuteLabel.Enabled = StartButton.Enabled;
+            FileToExecuteLabel.Text = !Settings.FileToExecute.IsEmpty() ? Settings.FileToExecute : FileToExecuteLabel.Text;
+            FileToExecuteLabel.Enabled = Settings.FileToExecute.IsEmpty() || StartButton.Enabled;
         }
 
         private void UpdateOutputText(bool clean, string output = null, bool error = false)
@@ -115,7 +115,7 @@ namespace Runner
                 if (!SelectNewFileToExecute())
                 {
                     // If no file to execute exit from app
-                    Application.Exit();
+                    MessageBox.Show("È necessario selezionare un file da eseguire", "Informazione", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
 
