@@ -116,8 +116,14 @@ namespace Runner
                 try
                 {
                     // Kill process
-                    Process.Kill();
-                    Process = null;
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = "taskkill.exe",
+                        Arguments = "/F /T /PID " + Process.Id,
+                        UseShellExecute = false,
+                        CreateNoWindow = true
+                    }).WaitForExit();
+
                     result = true;
                 }
                 catch (Exception e)
