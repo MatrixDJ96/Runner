@@ -141,6 +141,7 @@ namespace Runner
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Runner";
             this.Load += new System.EventHandler(this.RunnerForm_Load);
+            this.ResizeEnd += new System.EventHandler(this.RunnerForm_ResizeEnd);
             this.TopPanel.ResumeLayout(false);
             this.TopPanel.PerformLayout();
             this.FillPanel.ResumeLayout(false);
