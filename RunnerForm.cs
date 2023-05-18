@@ -102,9 +102,11 @@ namespace Runner
 
         private void RunnerForm_Load(object sender, EventArgs e)
         {
-
             // Load settings
             Settings.Load();
+
+            // Bring to front
+            BringToFront();
 
             // Check if file to execute are set
             if (Settings.FileToExecute.IsEmpty())
