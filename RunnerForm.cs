@@ -156,7 +156,7 @@ namespace Runner
                 if (!ProcessHelper.IsRunning)
                 {
                     // Create process
-                    ProcessHelper.Create(Settings.FileToExecute);
+                    ProcessHelper.Create(Settings.FileToExecute, Settings.Arguments);
 
                     // Start process
                     if (!ProcessHelper.Start())
