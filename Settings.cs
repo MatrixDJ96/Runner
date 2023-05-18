@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 
 namespace Runner
 {
@@ -15,89 +15,105 @@ namespace Runner
 
         public static bool Save(bool clean = true)
         {
-            // Check if settings file exists
-            var exists = File.Exists(Program.SettingsPath);
+            var result = false;
 
-            if (!exists || clean)
+            try
             {
-                if (exists && clean)
+                // Check if settings file exists
+                var exists = File.Exists(Program.SettingsPath);
+
+                if (!exists || clean)
                 {
-                    // Remove old configuration file
-                    File.Delete(Program.SettingsPath);
+                    if (exists && clean)
+                    {
+                        // Remove old configuration file
+                        File.Delete(Program.SettingsPath);
+                    }
+
+                    var dir = Path.GetDirectoryName(Program.SettingsPath);
+
+                    if (!Directory.Exists(dir))
+                    {
+                        Directory.CreateDirectory(dir);
+                    }
+
+                    // Create a new configuration file with default settings
+                    using (var stream = File.CreateText(Program.SettingsPath))
+                    {
+                        stream.WriteLine(nameof(FirstRun) + "=" + FirstRun);
+                        stream.WriteLine(nameof(SizeWidth) + "=" + SizeWidth);
+                        stream.WriteLine(nameof(SizeHeight) + "=" + SizeHeight);
+                        stream.WriteLine(nameof(LocationX) + "=" + LocationX);
+                        stream.WriteLine(nameof(LocationY) + "=" + LocationY);
+                        stream.WriteLine(nameof(FileToExecute) + "=" + FileToExecute);
+                    }
                 }
 
-                var dir = Path.GetDirectoryName(Program.SettingsPath);
-
-                if (!Directory.Exists(dir))
-                {
-                    Directory.CreateDirectory(dir);
-                }
-
-                // Create a new configuration file with default settings
-                using (var stream = File.CreateText(Program.SettingsPath))
-                {
-                    stream.WriteLine(nameof(FirstRun) + "=" + FirstRun);
-                    stream.WriteLine(nameof(SizeWidth) + "=" + SizeWidth);
-                    stream.WriteLine(nameof(SizeHeight) + "=" + SizeHeight);
-                    stream.WriteLine(nameof(LocationX) + "=" + LocationX);
-                    stream.WriteLine(nameof(LocationY) + "=" + LocationY);
-                    stream.WriteLine(nameof(FileToExecute) + "=" + FileToExecute);
-                }
+                result = true;
             }
+            catch { }
 
-            return true;
+            return result;
         }
 
         public static bool Load()
         {
-            Save(false);
+            var result = false;
 
-            // Load settings reading line by line
-            foreach (var line in File.ReadAllLines(Program.SettingsPath))
+            try
             {
-                // Split line in 2 piece
-                var chunks = line.Split('=');
+                Save(false);
 
-                // Check if lenght is correct
-                if (chunks.Length == 2)
+                // Load settings reading line by line
+                foreach (var line in File.ReadAllLines(Program.SettingsPath))
                 {
-                    // Set setting key
-                    var key = chunks[0];
-                    // Set setting value
-                    var value = chunks[1];
+                    // Split line in 2 piece
+                    var chunks = line.Split('=');
 
-                    // Apply loaded setting
-                    switch (key)
+                    // Check if lenght is correct
+                    if (chunks.Length == 2)
                     {
-                        case nameof(FirstRun):
-                            // Set form height
-                            FirstRun = bool.Parse(value.Trim());
-                            break;
-                        case nameof(SizeHeight):
-                            // Set form height
-                            SizeHeight = int.Parse(value.Trim());
-                            break;
-                        case nameof(SizeWidth):
-                            // Set form width
-                            SizeWidth = int.Parse(value.Trim());
-                            break;
-                        case nameof(LocationX):
-                            // Set form x position
-                            LocationX = int.Parse(value.Trim());
-                            break;
-                        case nameof(LocationY):
-                            // Set form y position
-                            LocationY = int.Parse(value.Trim());
-                            break;
-                        case nameof(FileToExecute):
-                            // Set file to execute
-                            FileToExecute = value.Trim();
-                            break;
+                        // Set setting key
+                        var key = chunks[0];
+                        // Set setting value
+                        var value = chunks[1];
+
+                        // Apply loaded setting
+                        switch (key)
+                        {
+                            case nameof(FirstRun):
+                                // Set form height
+                                FirstRun = bool.Parse(value.Trim());
+                                break;
+                            case nameof(SizeHeight):
+                                // Set form height
+                                SizeHeight = int.Parse(value.Trim());
+                                break;
+                            case nameof(SizeWidth):
+                                // Set form width
+                                SizeWidth = int.Parse(value.Trim());
+                                break;
+                            case nameof(LocationX):
+                                // Set form x position
+                                LocationX = int.Parse(value.Trim());
+                                break;
+                            case nameof(LocationY):
+                                // Set form y position
+                                LocationY = int.Parse(value.Trim());
+                                break;
+                            case nameof(FileToExecute):
+                                // Set file to execute
+                                FileToExecute = value.Trim();
+                                break;
+                        }
                     }
                 }
-            }
 
-            return true;
+                result = true;
+            }
+            catch { }
+
+            return result;
         }
     }
 }
