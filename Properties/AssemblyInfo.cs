@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set di attributi. Modificare i valori di questi attributi per modificare le informazioni
 // associate a un assembly.
 [assembly: AssemblyTitle("Runner")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("App to run executables")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("MatrixDJ96")]
 [assembly: AssemblyProduct("Runner")]
 [assembly: AssemblyCopyright("Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]
