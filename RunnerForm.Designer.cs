@@ -47,20 +47,23 @@ namespace Runner
             this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.TopPanel.Location = new System.Drawing.Point(0, 0);
             this.TopPanel.Name = "TopPanel";
-            this.TopPanel.Size = new System.Drawing.Size(800, 23);
+            this.TopPanel.Padding = new System.Windows.Forms.Padding(5);
+            this.TopPanel.Size = new System.Drawing.Size(800, 31);
             this.TopPanel.TabIndex = 0;
             // 
             // FileToExecuteLabel
             // 
             this.FileToExecuteLabel.AutoSize = true;
+            this.FileToExecuteLabel.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.FileToExecuteLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.FileToExecuteLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FileToExecuteLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FileToExecuteLabel.Location = new System.Drawing.Point(0, 0);
+            this.FileToExecuteLabel.Location = new System.Drawing.Point(5, 5);
             this.FileToExecuteLabel.Name = "FileToExecuteLabel";
-            this.FileToExecuteLabel.Padding = new System.Windows.Forms.Padding(5);
-            this.FileToExecuteLabel.Size = new System.Drawing.Size(85, 23);
+            this.FileToExecuteLabel.Padding = new System.Windows.Forms.Padding(3);
+            this.FileToExecuteLabel.Size = new System.Drawing.Size(223, 21);
             this.FileToExecuteLabel.TabIndex = 0;
-            this.FileToExecuteLabel.Text = "FileToExecute";
+            this.FileToExecuteLabel.Text = "Clicca qui per selezionale un file da eseguire";
             this.FileToExecuteLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.FileToExecuteLabel.Click += new System.EventHandler(this.FileToExecuteLabel_Click);
             // 
@@ -70,10 +73,10 @@ namespace Runner
             this.FillPanel.Controls.Add(this.OutputTextBox);
             this.FillPanel.Controls.Add(this.RightPanel);
             this.FillPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FillPanel.Location = new System.Drawing.Point(0, 23);
+            this.FillPanel.Location = new System.Drawing.Point(0, 31);
             this.FillPanel.Name = "FillPanel";
             this.FillPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.FillPanel.Size = new System.Drawing.Size(800, 427);
+            this.FillPanel.Size = new System.Drawing.Size(800, 419);
             this.FillPanel.TabIndex = 1;
             // 
             // OutputTextBox
@@ -83,9 +86,9 @@ namespace Runner
             this.OutputTextBox.Location = new System.Drawing.Point(5, 5);
             this.OutputTextBox.Name = "OutputTextBox";
             this.OutputTextBox.ReadOnly = true;
-            this.OutputTextBox.Size = new System.Drawing.Size(709, 417);
+            this.OutputTextBox.Size = new System.Drawing.Size(709, 409);
             this.OutputTextBox.TabIndex = 1;
-            this.OutputTextBox.Text = "Output";
+            this.OutputTextBox.Text = "";
             // 
             // RightPanel
             // 
@@ -96,7 +99,7 @@ namespace Runner
             this.RightPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.RightPanel.Location = new System.Drawing.Point(714, 5);
             this.RightPanel.Name = "RightPanel";
-            this.RightPanel.Size = new System.Drawing.Size(81, 417);
+            this.RightPanel.Size = new System.Drawing.Size(81, 409);
             this.RightPanel.TabIndex = 2;
             // 
             // StartButton
