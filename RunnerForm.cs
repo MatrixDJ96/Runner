@@ -65,7 +65,7 @@ namespace Runner
                 OutputTextBox.Clear();
             }
 
-            if (!output.IsEmpty())
+            if (output != null)
             {
                 // Set output color
                 OutputTextBox.SelectionColor = error ? Color.Red : Color.Black;
