@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 
 namespace Runner
 {
@@ -35,6 +36,9 @@ namespace Runner
         {
             if (Process == null)
             {
+                // Get correct encoding for output
+                var encoding = Encoding.GetEncoding(850);
+
                 // Generate working from file path
                 var workingDir = Path.GetDirectoryName(file);
 
@@ -49,6 +53,8 @@ namespace Runner
                         UseShellExecute = false,
                         RedirectStandardOutput = true,
                         RedirectStandardError = true,
+                        StandardOutputEncoding = encoding,
+                        StandardErrorEncoding = encoding,
                         CreateNoWindow = true,
                     }
                 };
