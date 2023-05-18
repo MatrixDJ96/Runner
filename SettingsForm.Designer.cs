@@ -74,6 +74,7 @@ namespace Runner
             this.FileToExecuteLabel.TabIndex = 0;
             this.FileToExecuteLabel.Text = "File da eseguire";
             this.FileToExecuteLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.FileToExecuteLabel.Click += new System.EventHandler(this.FileToExecuteTextBox_Click);
             // 
             // FileToExecuteTextBox
             // 
@@ -82,6 +83,7 @@ namespace Runner
             this.FileToExecuteTextBox.Name = "FileToExecuteTextBox";
             this.FileToExecuteTextBox.Size = new System.Drawing.Size(200, 20);
             this.FileToExecuteTextBox.TabIndex = 1;
+            this.FileToExecuteTextBox.TextChanged += new System.EventHandler(this.FileToExecuteTextBox_TextChanged);
             // 
             // ArgumentLabel
             // 
@@ -104,6 +106,7 @@ namespace Runner
             this.ArgumentTextBox.Name = "ArgumentTextBox";
             this.ArgumentTextBox.Size = new System.Drawing.Size(200, 20);
             this.ArgumentTextBox.TabIndex = 3;
+            this.ArgumentTextBox.TextChanged += new System.EventHandler(this.ArgumentTextBox_TextChanged);
             // 
             // SaveButton
             // 
@@ -116,6 +119,7 @@ namespace Runner
             this.SaveButton.TabIndex = 1;
             this.SaveButton.Text = "Salva";
             this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // MainPanel
             // 
@@ -142,6 +146,7 @@ namespace Runner
             this.Name = "SettingsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Settings";
+            this.Load += new System.EventHandler(this.SettingsForm_Load);
             this.ListPanel.ResumeLayout(false);
             this.ListPanel.PerformLayout();
             this.MainPanel.ResumeLayout(false);
