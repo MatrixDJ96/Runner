@@ -69,29 +69,6 @@ namespace Runner
             }
         }
 
-        private bool SelectNewFileToExecute()
-        {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.RestoreDirectory = true;
-                openFileDialog.DereferenceLinks = false;
-                openFileDialog.Title = "Seleziona il file da eseguire";
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    // Get the path of specified file
-                    Settings.FileToExecute = openFileDialog.FileName;
-
-                    // Save new settings
-                    Settings.Save();
-
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
         private void Process_Execution(object sender, EventArgs e, bool clean)
         {
             UpdateComponents();
@@ -136,7 +113,7 @@ namespace Runner
             if (Settings.FileToExecute.IsEmpty())
             {
                 // Select new file to execute
-                if (!SelectNewFileToExecute())
+                if (!Settings.SelectFileToExecute())
                 {
                     // If no file to execute exit from app
                     MessageBox.Show("È necessario selezionare un file da eseguire", "Informazione", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -164,7 +141,7 @@ namespace Runner
         private void FileToExecuteLabel_Click(object sender, EventArgs e)
         {
             // Select new file to execute
-            if (SelectNewFileToExecute())
+            if (Settings.SelectFileToExecute())
             {
                 UpdateComponents();
             }
