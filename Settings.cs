@@ -116,6 +116,13 @@ namespace Runner
                     }
                 }
 
+                // Check if executable exists 
+                if (!Executable.IsEmpty() && !File.Exists(Executable))
+                {
+                    // Remove invalid setting
+                    Executable = "";
+                }
+
                 result = true;
             }
             catch { }
