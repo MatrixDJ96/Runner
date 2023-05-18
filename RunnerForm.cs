@@ -97,6 +97,12 @@ namespace Runner
 
         private void Process_Output(object sender, DataReceivedEventArgs e, bool error)
         {
+            if (e.Data == null)
+            {
+                // Skip null
+                return;
+            }
+
             UpdateOutputText(false, e.Data + Environment.NewLine, error);
         }
 
