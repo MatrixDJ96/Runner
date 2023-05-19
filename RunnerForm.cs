@@ -6,7 +6,7 @@ namespace Runner
 {
     public partial class RunnerForm : Form
     {
-        private string DefaultFileToExecuteText { get; set; } = "";
+        private string DefaultExecutableText { get; set; } = "";
 
         private SettingsForm SettingsForm { get; set; } = new SettingsForm();
 
@@ -28,7 +28,7 @@ namespace Runner
             Icon = Program.ExecutableIcon;
 
             // Set default text of file to execute label
-            DefaultFileToExecuteText = ExecutableLabel.Text;
+            DefaultExecutableText = FullExecutableLabel.Text;
 
             // Add version on form title
             Text += " v" + ProductVersion;
@@ -49,8 +49,8 @@ namespace Runner
             StopButton.Enabled = !Settings.Executable.IsEmpty() && Runner.IsRunning;
 
             // Update file to execute label
-            ExecutableLabel.Text = !Settings.Executable.IsEmpty() ? (Settings.Executable + " " + Settings.Arguments).Trim() : DefaultFileToExecuteText;
-            ExecutableLabel.Enabled = Settings.Executable.IsEmpty() || StartButton.Enabled;
+            FullExecutableLabel.Text = !Settings.Executable.IsEmpty() ? Settings.FullExecutable : DefaultExecutableText;
+            FullExecutableLabel.Enabled = Settings.Executable.IsEmpty() || StartButton.Enabled;
         }
 
         private void UpdateOutputText(bool clean, string output = null, bool error = false)
@@ -175,7 +175,7 @@ namespace Runner
             Settings.Save();
         }
 
-        private void FileToExecuteLabel_Click(object sender, EventArgs e)
+        private void ExecutableLabel_Click(object sender, EventArgs e)
         {
             // Select new file to execute
             if (SettingsForm.ShowDialog(this) == DialogResult.OK)
