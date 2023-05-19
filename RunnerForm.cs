@@ -168,8 +168,8 @@ namespace Runner
                 RunnerForm_ResizeEnd(sender, e);
             }
 
-            // Bring to front
-            BringToFront();
+            // Set app in foreground 
+            Activate();
 
             // Update GUI
             UpdateComponents();
