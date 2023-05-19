@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -11,11 +12,15 @@ namespace Runner
 
         // Name of the current executable
         public static string ExecutableName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
+
         // Version of the current executable
         public static Version ExecutableVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
 
         // Full path of the current executable
         public static string ExecutablePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+
+        // Icon of the current executable
+        public static Icon ExecutableIcon = Icon.ExtractAssociatedIcon(ExecutablePath);
 
         // Full path of the program settings
         public static string SettingsPath = Path.Combine(

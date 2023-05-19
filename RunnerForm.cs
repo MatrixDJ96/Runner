@@ -25,7 +25,7 @@ namespace Runner
             Runner.OutputDataReceived += (s, e) => Process_Output(s, e, false);
 
             // Set application icon to form
-            Icon = Icon.ExtractAssociatedIcon(Program.ExecutablePath);
+            Icon = Program.ExecutableIcon;
 
             // Set default text of file to execute label
             DefaultFileToExecuteText = ExecutableLabel.Text;
