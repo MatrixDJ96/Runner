@@ -83,6 +83,7 @@ namespace Runner
             this.AbortButton.TabIndex = 1;
             this.AbortButton.Text = "Annulla";
             this.AbortButton.UseVisualStyleBackColor = true;
+            this.AbortButton.Click += new System.EventHandler(this.AbortButton_Click);
             // 
             // UpdaterForm
             // 
@@ -95,6 +96,7 @@ namespace Runner
             this.Name = "UpdaterForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Updater";
+            this.Load += new System.EventHandler(this.UpdaterForm_Load);
             this.MainPanel.ResumeLayout(false);
             this.MainPanel.PerformLayout();
             this.ListPanel.ResumeLayout(false);

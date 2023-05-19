@@ -6,6 +6,8 @@ namespace Runner
 {
     internal static class Program
     {
+        // Indicates whether the program needs to be restarted
+        public static bool NeedRestart { get; set; } = false;
 
         // Name of the current executable
         public static string ExecutableName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
@@ -38,7 +40,14 @@ namespace Runner
                 MessageBox.Show("Errore caricamento impostazioni", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
-            Application.Run(new RunnerForm());
+            // Start updater form
+            Application.Run(new UpdaterForm());
+
+            if (!NeedRestart)
+            {
+                // Start runner form
+                Application.Run(new RunnerForm());
+            }
         }
     }
 }
