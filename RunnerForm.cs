@@ -17,6 +17,7 @@ namespace Runner
             InitializeComponent();
 
             // Set event listner
+            ProcessHelper.Started += (s, e) => ShowOutputText(true,  true);
             ProcessHelper.Started += (s, e) => Process_Execution(s, e, true);
             ProcessHelper.Exited += (s, e) => Process_Execution(s, e, false);
 
@@ -76,16 +77,51 @@ namespace Runner
             if (clean)
             {
                 // Clean previous output
+                ErrorTextBox.Clear();
                 OutputTextBox.Clear();
             }
 
             if (output != null)
             {
+                var textBox = error ? ErrorTextBox : OutputTextBox;
+
                 // Set output color
-                OutputTextBox.SelectionColor = error ? Color.Red : Color.Black;
+                textBox.SelectionColor = error ? Color.Red : Color.Black;
 
                 // Append new output
-                OutputTextBox.SelectedText = output;
+                textBox.SelectedText = output;
+
+                if (error)
+                {
+                    ErrorButton.Enabled = true;
+                }
+            }
+        }
+
+        private void ShowOutputText(bool show, bool button = false)
+        {
+            if (InvokeRequired)
+            {
+                // Invoke correct thread to update gui
+                Invoke((MethodInvoker)delegate { UpdateComponents(); });
+
+                return;
+            }
+
+            if (show)
+            {
+                ErrorButton.Text = ErrorButton.Text.Replace("Nascondi", "Mostra");
+                OutputTextBox.BringToFront();
+            }
+            else
+            {
+                ErrorButton.Text = ErrorButton.Text.Replace("Mostra", "Nascondi");
+                ErrorTextBox.BringToFront();
+            }
+
+            if (button)
+            {
+                ErrorButton.Enabled = false;
             }
         }
 
@@ -195,6 +231,14 @@ namespace Runner
                     MessageBox.Show(("Impossibile interrompere il processo!" + error).Trim(), "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void ErrorButton_Click(object sender, EventArgs e)
+        {
+            var outputIndex = FillPanel.Controls.GetChildIndex(OutputTextBox);
+            var errorIndex = FillPanel.Controls.GetChildIndex(ErrorTextBox);
+
+            ShowOutputText(outputIndex > errorIndex);
         }
     }
 }
