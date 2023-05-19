@@ -10,19 +10,19 @@ namespace Runner
         private string DefaultFileToExecuteText { get; set; } = "";
 
         private SettingsForm SettingsForm { get; set; } = new SettingsForm();
-        private ProcessHelper ProcessHelper { get; set; } = new ProcessHelper();
+        private Runner Runner { get; set; } = new Runner();
 
         public RunnerForm()
         {
             InitializeComponent();
 
             // Set event listner
-            ProcessHelper.Started += (s, e) => ShowOutputText(true,  true);
-            ProcessHelper.Started += (s, e) => Process_Execution(s, e, true);
-            ProcessHelper.Exited += (s, e) => Process_Execution(s, e, false);
+            Runner.Started += (s, e) => ShowOutputText(true,  true);
+            Runner.Started += (s, e) => Process_Execution(s, e, true);
+            Runner.Exited += (s, e) => Process_Execution(s, e, false);
 
-            ProcessHelper.ErrorDataReceived += (s, e) => Process_Output(s, e, true);
-            ProcessHelper.OutputDataReceived += (s, e) => Process_Output(s, e, false);
+            Runner.ErrorDataReceived += (s, e) => Process_Output(s, e, true);
+            Runner.OutputDataReceived += (s, e) => Process_Output(s, e, false);
 
             // Set application icon to form
             Icon = Icon.ExtractAssociatedIcon(Program.ExecutablePath);
@@ -36,10 +36,10 @@ namespace Runner
             try
             {
                 // Check if process is running
-                if (ProcessHelper.IsRunning)
+                if (Runner.IsRunning)
                 {
                     // Stop process
-                    ProcessHelper.Kill();
+                    Runner.Kill();
                 }
             }
             catch { }
@@ -56,8 +56,8 @@ namespace Runner
             }
 
             // Update start and stop button
-            StartButton.Enabled = !Settings.Executable.IsEmpty() && !ProcessHelper.IsRunning;
-            StopButton.Enabled = !Settings.Executable.IsEmpty() && ProcessHelper.IsRunning;
+            StartButton.Enabled = !Settings.Executable.IsEmpty() && !Runner.IsRunning;
+            StopButton.Enabled = !Settings.Executable.IsEmpty() && Runner.IsRunning;
 
             // Update file to execute label
             ExecutableLabel.Text = !Settings.Executable.IsEmpty() ? (Settings.Executable + " " +  Settings.Arguments).Trim() : DefaultFileToExecuteText;
@@ -204,15 +204,15 @@ namespace Runner
             if (!Settings.Executable.IsEmpty())
             {
                 // Check if process is running
-                if (!ProcessHelper.IsRunning)
+                if (!Runner.IsRunning)
                 {
                     // Create process
-                    ProcessHelper.Create(Settings.Executable, Settings.Arguments);
+                    Runner.Create(Settings.Executable, Settings.Arguments);
 
                     // Start process
-                    if (!ProcessHelper.Start())
+                    if (!Runner.Start())
                     {
-                        var error = Environment.NewLine + Environment.NewLine + ProcessHelper.LastError;
+                        var error = Environment.NewLine + Environment.NewLine + Runner.LastError;
                         MessageBox.Show(("Impossibile avviare il processo!" + error).Trim(), "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
@@ -222,12 +222,12 @@ namespace Runner
         private void StopButton_Click(object sender, EventArgs e)
         {
             // Check if process is running
-            if (ProcessHelper.IsRunning)
+            if (Runner.IsRunning)
             {
                 // Stop process
-                if (!ProcessHelper.Kill())
+                if (!Runner.Kill())
                 {
-                    var error = Environment.NewLine + Environment.NewLine + ProcessHelper.LastError;
+                    var error = Environment.NewLine + Environment.NewLine + Runner.LastError;
                     MessageBox.Show(("Impossibile interrompere il processo!" + error).Trim(), "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
