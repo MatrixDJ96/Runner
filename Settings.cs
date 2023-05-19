@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Runner
@@ -14,6 +14,8 @@ namespace Runner
 
         public static string Executable { get; set; } = "";
         public static string Arguments { get; set; } = "";
+
+        public static string FullExecutable { get => (Executable + " " + Arguments).Trim(); }
 
         public static bool Save(bool clean = true)
         {
