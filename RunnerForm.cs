@@ -144,9 +144,6 @@ namespace Runner
 
         private void RunnerForm_Load(object sender, EventArgs e)
         {
-            // Load settings
-            Settings.Load();
-
             if (!Settings.FirstRun)
             {
                 // Apply saved location

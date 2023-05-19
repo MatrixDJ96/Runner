@@ -24,6 +24,14 @@ namespace Runner
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            // Load settings
+            if (!Settings.Load())
+            {
+                // Warn about error loading settings
+                MessageBox.Show("Errore caricamento impostazioni", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
             Application.Run(new RunnerForm());
         }
     }
