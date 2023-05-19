@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Threading;
 
 namespace Runner
 {
@@ -20,10 +21,16 @@ namespace Runner
         public event EventHandler Exited;
 
         // Event on process stderr data received
-        public event DataReceivedEventHandler ErrorDataReceived;
+        public event OutputReceivedEventHandler ErrorDataReceived;
 
         // Event on process stdout data received
-        public event DataReceivedEventHandler OutputDataReceived;
+        public event OutputReceivedEventHandler OutputDataReceived;
+
+        // Thread for reading error data from process
+        public Thread ErrorDataThread { get; private set; } = null;
+
+        // Thread for reading output data from process
+        public Thread OutputDataThread { get; private set; } = null;
 
         private void OnStarted()
         {
@@ -31,6 +38,41 @@ namespace Runner
             {
                 // Invoke listners
                 Started(this, EventArgs.Empty);
+            }
+        }
+
+        private void OnErrorDataReceived(object sender, string error)
+        {
+            // Dispatch event securely
+            ErrorDataReceived?.Invoke(sender, new OutputReceivedEventArgs(error));
+        }
+
+        private void OnOutputDataReceived(object sender, string output)
+        {
+            // Dispatch event securely
+            OutputDataReceived?.Invoke(sender, new OutputReceivedEventArgs(output));
+        }
+
+        private void ReadDataFromStream(StreamReader reader, bool error)
+        {
+            while (!reader.EndOfStream)
+            {
+                var content = reader.Read();
+                var output = (char)content;
+
+                if (content != -1 && output != '\r')
+                {
+                    if (error)
+                    {
+                        // Trigger error data event
+                        OnErrorDataReceived(this, output.ToString());
+                    }
+                    else
+                    {
+                        // Trigger output data event
+                        OnOutputDataReceived(this, output.ToString());
+                    }
+                }
             }
         }
 
@@ -65,10 +107,6 @@ namespace Runner
                 Process.Exited += Exited;
                 Process.Exited += (s, e) => Process = null;
 
-                // Set output events listners
-                Process.ErrorDataReceived += ErrorDataReceived;
-                Process.OutputDataReceived += OutputDataReceived;
-
                 // Enable process events
                 Process.EnableRaisingEvents = true;
             }
@@ -98,9 +136,20 @@ namespace Runner
                 {
                     // Trigger event
                     OnStarted();
-                    // Listen process output
-                    Process.BeginOutputReadLine();
-                    Process.BeginErrorReadLine();
+
+                    // Create thread for reading error
+                    ErrorDataThread = new Thread(
+                        new ThreadStart(() => ReadDataFromStream(Process.StandardError, true))
+                    );
+
+                    // Create thread for reading output
+                    OutputDataThread = new Thread(
+                        new ThreadStart(() => ReadDataFromStream(Process.StandardOutput, false))
+                    );
+
+                    // Start threads
+                    OutputDataThread.Start();
+                    ErrorDataThread.Start();
                 }
             }
 

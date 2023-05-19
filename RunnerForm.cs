@@ -95,15 +95,15 @@ namespace Runner
             UpdateOutputText(clean);
         }
 
-        private void Process_Output(object sender, DataReceivedEventArgs e, bool error)
+        private void Process_Output(object sender, OutputReceivedEventArgs e, bool error)
         {
-            if (e.Data == null)
+            if (e.Output == null)
             {
                 // Skip null
                 return;
             }
 
-            UpdateOutputText(false, e.Data + Environment.NewLine, error);
+            UpdateOutputText(false, e.Output, error);
         }
 
         private void RunnerForm_Load(object sender, EventArgs e)
