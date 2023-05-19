@@ -21,10 +21,10 @@ namespace Runner
         public event EventHandler Exited;
 
         // Event on process stderr data received
-        public event OutputReceivedEventHandler ErrorDataReceived;
+        public event RunnerReceivedEventHandler ErrorDataReceived;
 
         // Event on process stdout data received
-        public event OutputReceivedEventHandler OutputDataReceived;
+        public event RunnerReceivedEventHandler OutputDataReceived;
 
         // Thread for reading error data from process
         public Thread ErrorDataThread { get; private set; } = null;
@@ -44,13 +44,13 @@ namespace Runner
         private void OnErrorDataReceived(object sender, string error)
         {
             // Dispatch event securely
-            ErrorDataReceived?.Invoke(sender, new OutputReceivedEventArgs(error));
+            ErrorDataReceived?.Invoke(sender, new RunnerReceivedEventArgs(error));
         }
 
         private void OnOutputDataReceived(object sender, string output)
         {
             // Dispatch event securely
-            OutputDataReceived?.Invoke(sender, new OutputReceivedEventArgs(output));
+            OutputDataReceived?.Invoke(sender, new RunnerReceivedEventArgs(output));
         }
 
         private void ReadDataFromStream(StreamReader reader, bool error)

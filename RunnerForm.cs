@@ -131,7 +131,7 @@ namespace Runner
             UpdateOutputText(clean);
         }
 
-        private void Process_Output(object sender, OutputReceivedEventArgs e, bool error)
+        private void Process_Output(object sender, RunnerReceivedEventArgs e, bool error)
         {
             if (e.Output == null)
             {
