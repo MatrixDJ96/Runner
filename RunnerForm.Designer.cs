@@ -31,10 +31,12 @@ namespace Runner
             this.TopPanel = new System.Windows.Forms.Panel();
             this.ExecutableLabel = new System.Windows.Forms.Label();
             this.FillPanel = new System.Windows.Forms.Panel();
+            this.ErrorTextBox = new System.Windows.Forms.RichTextBox();
             this.OutputTextBox = new System.Windows.Forms.RichTextBox();
             this.RightPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.StartButton = new System.Windows.Forms.Button();
             this.StopButton = new System.Windows.Forms.Button();
+            this.ErrorButton = new System.Windows.Forms.Button();
             this.TopPanel.SuspendLayout();
             this.FillPanel.SuspendLayout();
             this.RightPanel.SuspendLayout();
@@ -70,6 +72,7 @@ namespace Runner
             // FillPanel
             // 
             this.FillPanel.AutoSize = true;
+            this.FillPanel.Controls.Add(this.ErrorTextBox);
             this.FillPanel.Controls.Add(this.OutputTextBox);
             this.FillPanel.Controls.Add(this.RightPanel);
             this.FillPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -79,6 +82,17 @@ namespace Runner
             this.FillPanel.Size = new System.Drawing.Size(800, 419);
             this.FillPanel.TabIndex = 1;
             // 
+            // ErrorTextBox
+            // 
+            this.ErrorTextBox.BackColor = System.Drawing.Color.White;
+            this.ErrorTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ErrorTextBox.Location = new System.Drawing.Point(5, 5);
+            this.ErrorTextBox.Name = "ErrorTextBox";
+            this.ErrorTextBox.ReadOnly = true;
+            this.ErrorTextBox.Size = new System.Drawing.Size(681, 409);
+            this.ErrorTextBox.TabIndex = 1;
+            this.ErrorTextBox.Text = "";
+            // 
             // OutputTextBox
             // 
             this.OutputTextBox.BackColor = System.Drawing.Color.White;
@@ -86,8 +100,8 @@ namespace Runner
             this.OutputTextBox.Location = new System.Drawing.Point(5, 5);
             this.OutputTextBox.Name = "OutputTextBox";
             this.OutputTextBox.ReadOnly = true;
-            this.OutputTextBox.Size = new System.Drawing.Size(709, 409);
-            this.OutputTextBox.TabIndex = 1;
+            this.OutputTextBox.Size = new System.Drawing.Size(681, 409);
+            this.OutputTextBox.TabIndex = 2;
             this.OutputTextBox.Text = "";
             // 
             // RightPanel
@@ -95,21 +109,23 @@ namespace Runner
             this.RightPanel.AutoSize = true;
             this.RightPanel.Controls.Add(this.StartButton);
             this.RightPanel.Controls.Add(this.StopButton);
+            this.RightPanel.Controls.Add(this.ErrorButton);
             this.RightPanel.Dock = System.Windows.Forms.DockStyle.Right;
             this.RightPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.RightPanel.Location = new System.Drawing.Point(714, 5);
+            this.RightPanel.Location = new System.Drawing.Point(686, 5);
             this.RightPanel.Name = "RightPanel";
-            this.RightPanel.Size = new System.Drawing.Size(81, 409);
+            this.RightPanel.Size = new System.Drawing.Size(109, 409);
             this.RightPanel.TabIndex = 2;
             // 
             // StartButton
             // 
             this.StartButton.AutoSize = true;
+            this.StartButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.StartButton.Enabled = false;
             this.StartButton.Location = new System.Drawing.Point(3, 3);
             this.StartButton.Name = "StartButton";
             this.StartButton.Padding = new System.Windows.Forms.Padding(5);
-            this.StartButton.Size = new System.Drawing.Size(75, 33);
+            this.StartButton.Size = new System.Drawing.Size(103, 33);
             this.StartButton.TabIndex = 0;
             this.StartButton.Text = "Start";
             this.StartButton.UseVisualStyleBackColor = true;
@@ -118,15 +134,29 @@ namespace Runner
             // StopButton
             // 
             this.StopButton.AutoSize = true;
+            this.StopButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.StopButton.Enabled = false;
             this.StopButton.Location = new System.Drawing.Point(3, 42);
             this.StopButton.Name = "StopButton";
             this.StopButton.Padding = new System.Windows.Forms.Padding(5);
-            this.StopButton.Size = new System.Drawing.Size(75, 33);
+            this.StopButton.Size = new System.Drawing.Size(103, 33);
             this.StopButton.TabIndex = 1;
             this.StopButton.Text = "Stop";
             this.StopButton.UseVisualStyleBackColor = true;
             this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
+            // 
+            // ErrorButton
+            // 
+            this.ErrorButton.AutoSize = true;
+            this.ErrorButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ErrorButton.Enabled = false;
+            this.ErrorButton.Location = new System.Drawing.Point(3, 81);
+            this.ErrorButton.Name = "ErrorButton";
+            this.ErrorButton.Padding = new System.Windows.Forms.Padding(5);
+            this.ErrorButton.Size = new System.Drawing.Size(103, 35);
+            this.ErrorButton.TabIndex = 2;
+            this.ErrorButton.Text = "Mostra errori";
+            this.ErrorButton.Click += new System.EventHandler(this.ErrorButton_Click);
             // 
             // RunnerForm
             // 
@@ -158,10 +188,12 @@ namespace Runner
         private System.Windows.Forms.Panel TopPanel;
         private System.Windows.Forms.Label ExecutableLabel;
         private System.Windows.Forms.Panel FillPanel;
+        private System.Windows.Forms.RichTextBox ErrorTextBox;
         private System.Windows.Forms.RichTextBox OutputTextBox;
         private System.Windows.Forms.FlowLayoutPanel RightPanel;
         private System.Windows.Forms.Button StartButton;
         private System.Windows.Forms.Button StopButton;
+        private System.Windows.Forms.Button ErrorButton;
     }
 }
 
