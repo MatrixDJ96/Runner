@@ -34,20 +34,6 @@ namespace Runner
             Text += " v" + ProductVersion;
         }
 
-        ~RunnerForm()
-        {
-            try
-            {
-                // Check if process is running
-                if (Runner.IsRunning)
-                {
-                    // Stop process
-                    Runner.Kill();
-                }
-            }
-            catch { }
-        }
-
         private void UpdateComponents()
         {
             if (InvokeRequired)

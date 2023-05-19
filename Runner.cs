@@ -32,6 +32,11 @@ namespace Runner
         // Thread for reading output data from process
         public Thread OutputDataThread { get; private set; } = null;
 
+        ~Runner()
+        {
+            Kill();
+        }
+
         private void OnStarted()
         {
             if (Started != null)
