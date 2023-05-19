@@ -1,5 +1,4 @@
 using System.IO;
-using System.Windows.Forms;
 
 namespace Runner
 {
@@ -130,32 +129,6 @@ namespace Runner
             catch { }
 
             return result;
-        }
-
-        public static bool SelectFileToExecute(bool save = true)
-        {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.RestoreDirectory = true;
-                openFileDialog.DereferenceLinks = true;
-                openFileDialog.Title = "Seleziona il file da eseguire";
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    // Get the path of specified file
-                    Executable = openFileDialog.FileName;
-
-                    if (save)
-                    {
-                        // Save new settings
-                        Save();
-                    }
-
-                    return true;
-                }
-            }
-
-            return false;
         }
     }
 }

@@ -90,6 +90,7 @@ namespace Runner
             this.ArgumentLabel.AutoSize = true;
             this.ArgumentLabel.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ArgumentLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ArgumentLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ArgumentLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ArgumentLabel.Location = new System.Drawing.Point(8, 41);
             this.ArgumentLabel.Name = "ArgumentLabel";
@@ -98,6 +99,7 @@ namespace Runner
             this.ArgumentLabel.TabIndex = 2;
             this.ArgumentLabel.Text = "Argomenti";
             this.ArgumentLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ArgumentLabel.Click += new System.EventHandler(this.ArgumentLabel_Click);
             // 
             // ArgumentTextBox
             // 
