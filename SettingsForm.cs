@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Forms;
 
 namespace Runner
@@ -52,6 +52,28 @@ namespace Runner
             ArgumentTextBox.Width = Math.Max(TextRenderer.MeasureText(ArgumentTextBox.Text, ArgumentTextBox.Font).Width, 200);
         }
 
+        public static bool SelectFileToExecute(out string filename)
+        {
+            filename = null;
+
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.RestoreDirectory = true;
+                openFileDialog.DereferenceLinks = true;
+                openFileDialog.Title = "Seleziona il file da eseguire";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Get the path of specified file
+                    filename = openFileDialog.FileName;
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         private void SettingsForm_Load(object sender, EventArgs e)
         {
             // Set settings as not updated
@@ -63,8 +85,23 @@ namespace Runner
 
         private void FileToExecuteTextBox_Click(object sender, EventArgs e)
         {
-            if (Settings.SelectFileToExecute(false))
+            if (SelectFileToExecute(out var filename))
             {
+                // Set new executable
+                Settings.Executable = filename;
+
+                // Update GUI
+                UpdateComponents();
+            }
+        }
+
+        private void ArgumentLabel_Click(object sender, EventArgs e)
+        {
+            if (SelectFileToExecute(out var filename))
+            {
+                // Set new arguments
+                Settings.Arguments = filename;
+
                 // Update GUI
                 UpdateComponents();
             }
@@ -115,6 +152,5 @@ namespace Runner
                 Settings.Load();
             }
         }
-
     }
 }
