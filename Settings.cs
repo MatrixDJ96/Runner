@@ -135,7 +135,7 @@ namespace Runner
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.RestoreDirectory = true;
-                openFileDialog.DereferenceLinks = false;
+                openFileDialog.DereferenceLinks = true;
                 openFileDialog.Title = "Seleziona il file da eseguire";
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
