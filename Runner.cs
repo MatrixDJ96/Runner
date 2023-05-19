@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace Runner
 {
-    internal class ProcessHelper
+    internal class Runner
     {
         public Process Process { get; private set; } = null;
 
