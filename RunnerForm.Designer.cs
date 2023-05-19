@@ -128,7 +128,6 @@ namespace Runner
             this.StartButton.Size = new System.Drawing.Size(103, 33);
             this.StartButton.TabIndex = 0;
             this.StartButton.Text = "Start";
-            this.StartButton.UseVisualStyleBackColor = true;
             this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
             // StopButton
@@ -142,7 +141,6 @@ namespace Runner
             this.StopButton.Size = new System.Drawing.Size(103, 33);
             this.StopButton.TabIndex = 1;
             this.StopButton.Text = "Stop";
-            this.StopButton.UseVisualStyleBackColor = true;
             this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
             // 
             // ErrorButton

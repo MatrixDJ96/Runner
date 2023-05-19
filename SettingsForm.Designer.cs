@@ -118,7 +118,6 @@ namespace Runner
             this.SaveButton.Size = new System.Drawing.Size(75, 33);
             this.SaveButton.TabIndex = 1;
             this.SaveButton.Text = "Salva";
-            this.SaveButton.UseVisualStyleBackColor = true;
             this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // MainPanel

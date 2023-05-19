@@ -82,7 +82,6 @@ namespace Runner
             this.AbortButton.Size = new System.Drawing.Size(75, 33);
             this.AbortButton.TabIndex = 1;
             this.AbortButton.Text = "Annulla";
-            this.AbortButton.UseVisualStyleBackColor = true;
             this.AbortButton.Click += new System.EventHandler(this.AbortButton_Click);
             // 
             // UpdaterForm
