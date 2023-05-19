@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace Runner
@@ -14,7 +13,7 @@ namespace Runner
             InitializeComponent();
 
             // Set application icon to form
-            Icon = Icon.ExtractAssociatedIcon(Program.ExecutablePath);
+            Icon = Program.ExecutableIcon;
         }
 
         private void UpdateComponents(bool width = true)
