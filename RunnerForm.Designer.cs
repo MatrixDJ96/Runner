@@ -86,6 +86,7 @@ namespace Runner
             // 
             this.ErrorTextBox.BackColor = System.Drawing.Color.White;
             this.ErrorTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ErrorTextBox.ForeColor = System.Drawing.Color.Red;
             this.ErrorTextBox.Location = new System.Drawing.Point(5, 5);
             this.ErrorTextBox.Name = "ErrorTextBox";
             this.ErrorTextBox.ReadOnly = true;

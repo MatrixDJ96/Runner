@@ -72,17 +72,17 @@ namespace Runner
 
             if (output != null)
             {
-                var textBox = error ? ErrorTextBox : OutputTextBox;
-
-                // Set output color
-                textBox.SelectionColor = error ? Color.Red : Color.Black;
-
-                // Append new output
-                textBox.SelectedText = output;
-
                 if (error)
                 {
+                    // Append new error
+                    ErrorTextBox.AppendText(output);
+                    // Enable error button
                     ErrorButton.Enabled = true;
+                }
+                else
+                {
+                    // Append new output
+                    OutputTextBox.AppendText(output);
                 }
             }
         }
