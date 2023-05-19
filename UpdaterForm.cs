@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
@@ -20,6 +21,9 @@ namespace Runner
 
             Updater.DownloadProgressChanged += (s, e) => Activate();
             Updater.DownloadProgressChanged += Updater_DownloadProgressChanged;
+
+            // Set application icon to form
+            Icon = Icon.ExtractAssociatedIcon(Program.ExecutablePath);
         }
 
         private void UpdaterForm_Load(object sender, EventArgs e)
