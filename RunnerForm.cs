@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -10,6 +9,7 @@ namespace Runner
         private string DefaultFileToExecuteText { get; set; } = "";
 
         private SettingsForm SettingsForm { get; set; } = new SettingsForm();
+
         private Runner Runner { get; set; } = new Runner();
 
         public RunnerForm()
@@ -17,7 +17,7 @@ namespace Runner
             InitializeComponent();
 
             // Set event listner
-            Runner.Started += (s, e) => ShowOutputText(true,  true);
+            Runner.Started += (s, e) => ShowOutputText(true, true);
             Runner.Started += (s, e) => Process_Execution(s, e, true);
             Runner.Exited += (s, e) => Process_Execution(s, e, false);
 
@@ -60,7 +60,7 @@ namespace Runner
             StopButton.Enabled = !Settings.Executable.IsEmpty() && Runner.IsRunning;
 
             // Update file to execute label
-            ExecutableLabel.Text = !Settings.Executable.IsEmpty() ? (Settings.Executable + " " +  Settings.Arguments).Trim() : DefaultFileToExecuteText;
+            ExecutableLabel.Text = !Settings.Executable.IsEmpty() ? (Settings.Executable + " " + Settings.Arguments).Trim() : DefaultFileToExecuteText;
             ExecutableLabel.Enabled = Settings.Executable.IsEmpty() || StartButton.Enabled;
         }
 
