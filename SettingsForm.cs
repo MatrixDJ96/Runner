@@ -21,7 +21,7 @@ namespace Runner
             if (InvokeRequired)
             {
                 // Invoke correct thread to update gui
-                Invoke((MethodInvoker)delegate { UpdateComponents(width); });
+                Invoke((MethodInvoker)delegate { this?.UpdateComponents(width); });
 
                 return;
             }
@@ -42,7 +42,7 @@ namespace Runner
             if (InvokeRequired)
             {
                 // Invoke correct thread to update gui
-                Invoke((MethodInvoker)delegate { UpdateComponentsWidth(); });
+                Invoke((MethodInvoker)delegate { this?.UpdateComponentsWidth(); });
 
                 return;
             }
