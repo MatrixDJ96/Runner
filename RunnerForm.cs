@@ -29,6 +29,9 @@ namespace Runner
 
             // Set default text of file to execute label
             DefaultFileToExecuteText = ExecutableLabel.Text;
+
+            // Add version on form title
+            Text += " v" + ProductVersion;
         }
 
         ~RunnerForm()
