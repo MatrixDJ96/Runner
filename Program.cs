@@ -6,13 +6,19 @@ namespace Runner
 {
     internal static class Program
     {
+
+        // Name of the current executable
+        public static string ExecutableName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
+        // Version of the current executable
+        public static Version ExecutableVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+
         // Full path of the current executable
         public static string ExecutablePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
 
         // Full path of the program settings
         public static string SettingsPath = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            System.Reflection.Assembly.GetExecutingAssembly().GetName().Name,
+            ExecutableName,
             "Settings.ini"
         );
 
