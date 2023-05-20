@@ -128,7 +128,7 @@ namespace Runner
             this.StartButton.Padding = new System.Windows.Forms.Padding(5);
             this.StartButton.Size = new System.Drawing.Size(103, 36);
             this.StartButton.TabIndex = 0;
-            this.StartButton.Text = "Start";
+            this.StartButton.Text = "Avvia";
             this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
             // StopButton
@@ -141,7 +141,7 @@ namespace Runner
             this.StopButton.Padding = new System.Windows.Forms.Padding(5);
             this.StopButton.Size = new System.Drawing.Size(103, 36);
             this.StopButton.TabIndex = 1;
-            this.StopButton.Text = "Stop";
+            this.StopButton.Text = "Interrompi";
             this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
             // 
             // ErrorButton
