@@ -113,6 +113,7 @@ namespace Runner
             // SaveButton
             // 
             this.SaveButton.AutoSize = true;
+            this.SaveButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.SaveButton.Location = new System.Drawing.Point(10, 83);
             this.SaveButton.Margin = new System.Windows.Forms.Padding(10, 5, 10, 5);
             this.SaveButton.Name = "SaveButton";
