@@ -34,7 +34,7 @@ namespace Runner
             DefaultExecutableText = FullExecutableLabel.Text;
 
             // Add version on form title
-            Text += " v" + ProductVersion;
+            Text += " v" + Program.ExecutableVersion;
         }
 
         private void UpdateComponents()
