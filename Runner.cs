@@ -60,23 +60,37 @@ namespace Runner
 
         private void ReadDataFromStream(StreamReader reader, bool error)
         {
+            // Define size of memory block
+            var blockSize = 100;
+
             while (!reader.EndOfStream)
             {
-                var content = reader.Read();
-                var output = (char)content;
+                // Create block of memory
+                var blockChars = new char[blockSize];
+                // Read output from stream with blockSize
+                reader.Read(blockChars, 0, blockSize);
+                // Create result string
+                string output = null;
 
-                if (content != -1 && output != '\r')
+                // Clean block of memory from invalid char
+                foreach (var @char in blockChars)
                 {
-                    if (error)
+                    if (@char != '\r' && @char != '\0')
                     {
-                        // Trigger error data event
-                        OnErrorDataReceived(this, output.ToString());
+                        // Append valid char
+                        output += @char;
                     }
-                    else
-                    {
-                        // Trigger output data event
-                        OnOutputDataReceived(this, output.ToString());
-                    }
+                }
+
+                if (error)
+                {
+                    // Trigger error data event
+                    OnErrorDataReceived(this, output);
+                }
+                else
+                {
+                    // Trigger output data event
+                    OnOutputDataReceived(this, output);
                 }
             }
         }
