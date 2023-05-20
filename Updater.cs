@@ -118,11 +118,41 @@ namespace Runner
                         filename
                    );
 
-                    using (var stream = new FileStream(newPath, FileMode.Create, FileAccess.Write))
+                    // Set temp path to write file
+                    var tmpPath = Path.GetTempFileName();
+
+                    using (var stream = new FileStream(tmpPath, FileMode.Create, FileAccess.Write))
                     {
                         // Write new file
                         stream.Write(e.Result, 0, e.Result.Length);
                     }
+
+                    // Define old path
+                    var oldPath = Program.ExecutablePath + ".old";
+
+                    if (File.Exists(oldPath))
+                    {
+                        // Remove old file
+                        File.Delete(oldPath);
+                    }
+
+                    // Backup current file
+                    File.Move(Program.ExecutablePath, oldPath);
+
+                    if (File.Exists(newPath))
+                    {
+                        if (File.Exists(newPath + ".bak"))
+                        {
+                            // Delete previous backup
+                            File.Delete(newPath + ".bak");
+                        }
+
+                        // Backup existing new file
+                        File.Move(newPath, newPath + ".bak");
+                    }
+
+                    // Move new file from tmp
+                    File.Move(tmpPath, newPath);
 
                     // Set path of downloaded file
                     dce.FilePath = newPath;
