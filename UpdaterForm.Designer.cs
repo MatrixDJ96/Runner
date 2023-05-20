@@ -75,6 +75,7 @@ namespace Runner
             // AbortButton
             // 
             this.AbortButton.AutoSize = true;
+            this.AbortButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.AbortButton.Location = new System.Drawing.Point(10, 57);
             this.AbortButton.Margin = new System.Windows.Forms.Padding(10, 5, 10, 5);
             this.AbortButton.Name = "AbortButton";

@@ -45,6 +45,7 @@ namespace Runner
             // TopPanel
             // 
             this.TopPanel.AutoSize = true;
+            this.TopPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.TopPanel.Controls.Add(this.FullExecutableLabel);
             this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.TopPanel.Location = new System.Drawing.Point(0, 0);
@@ -72,6 +73,7 @@ namespace Runner
             // FillPanel
             // 
             this.FillPanel.AutoSize = true;
+            this.FillPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.FillPanel.Controls.Add(this.ErrorTextBox);
             this.FillPanel.Controls.Add(this.OutputTextBox);
             this.FillPanel.Controls.Add(this.RightPanel);
@@ -108,6 +110,7 @@ namespace Runner
             // RightPanel
             // 
             this.RightPanel.AutoSize = true;
+            this.RightPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.RightPanel.Controls.Add(this.StartButton);
             this.RightPanel.Controls.Add(this.StopButton);
             this.RightPanel.Controls.Add(this.ErrorButton);
@@ -121,6 +124,7 @@ namespace Runner
             // StartButton
             // 
             this.StartButton.AutoSize = true;
+            this.StartButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.StartButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.StartButton.Enabled = false;
             this.StartButton.Location = new System.Drawing.Point(3, 3);
@@ -134,6 +138,7 @@ namespace Runner
             // StopButton
             // 
             this.StopButton.AutoSize = true;
+            this.StopButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.StopButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.StopButton.Enabled = false;
             this.StopButton.Location = new System.Drawing.Point(3, 45);
@@ -147,12 +152,13 @@ namespace Runner
             // ErrorButton
             // 
             this.ErrorButton.AutoSize = true;
+            this.ErrorButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ErrorButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ErrorButton.Enabled = false;
             this.ErrorButton.Location = new System.Drawing.Point(3, 87);
             this.ErrorButton.Name = "ErrorButton";
             this.ErrorButton.Padding = new System.Windows.Forms.Padding(5);
-            this.ErrorButton.Size = new System.Drawing.Size(103, 36);
+            this.ErrorButton.Size = new System.Drawing.Size(103, 33);
             this.ErrorButton.TabIndex = 2;
             this.ErrorButton.Text = "Mostra errori";
             this.ErrorButton.Click += new System.EventHandler(this.ErrorButton_Click);
