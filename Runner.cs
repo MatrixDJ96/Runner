@@ -141,13 +141,18 @@ namespace Runner
             {
                 try
                 {
+                    // Clean error
                     LastError = "";
+                    // Start process
                     Process.Start();
+                    // Set result as ok
                     result = true;
                 }
                 catch (Exception e)
                 {
+                    // Remove process
                     Process = null;
+                    // Update error
                     LastError = e.Message;
                 }
 
