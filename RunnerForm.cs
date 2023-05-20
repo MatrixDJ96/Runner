@@ -84,6 +84,8 @@ namespace Runner
             {
                 if (error)
                 {
+                    // Set focus
+                    ErrorTextBox.Focus();
                     // Append new error
                     ErrorTextBox.AppendText(output);
                     // Enable error button
@@ -91,6 +93,8 @@ namespace Runner
                 }
                 else
                 {
+                    // Set focus
+                    OutputTextBox.Focus();
                     // Append new output
                     OutputTextBox.AppendText(output);
                 }
