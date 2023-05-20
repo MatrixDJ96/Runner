@@ -42,18 +42,6 @@ namespace Runner
             {
                 try
                 {
-                    // Define old path
-                    var oldPath = Program.ExecutablePath + ".old";
-
-                    if (File.Exists(oldPath))
-                    {
-                        // Remove old file
-                        File.Delete(oldPath);
-                    }
-
-                    // Rename current file
-                    File.Move(Program.ExecutablePath, oldPath);
-
                     var update = "Scaricata nuova versione \"" + e.FileVersion + "\"" + Environment.NewLine + Environment.NewLine + "Vuoi applicare ora l'aggiornamento?";
 
                     if (MessageBox.Show(update, "Aggiornamento scaricato", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -82,12 +70,8 @@ namespace Runner
 
             if (e.Error != null)
             {
-                var error = "Errore scaricamento nuova versione!" + Environment.NewLine + Environment.NewLine + e.Error.Message;
-
-                if (MessageBox.Show(error, "Errore aggiornamento", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
-                {
-                    OnLoad(e);
-                }
+                var error = Environment.NewLine + Environment.NewLine + e.Error.Message;
+                MessageBox.Show(("Errore scaricamento nuova versione!" + error).Trim(), "Errore aggiornamento", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             Close();
