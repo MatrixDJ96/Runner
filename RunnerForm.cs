@@ -65,9 +65,16 @@ namespace Runner
 
             if (clean)
             {
-                // Clean previous output
-                ErrorTextBox.Clear();
-                OutputTextBox.Clear();
+                if (error)
+                {
+                    // Clean previous error
+                    ErrorTextBox.Clear();
+                }
+                else
+                {
+                    // Clean previous output
+                    OutputTextBox.Clear();
+                }
             }
 
             if (output != null)
@@ -117,7 +124,10 @@ namespace Runner
         private void Process_Execution(object sender, EventArgs e, bool clean)
         {
             UpdateComponents();
-            UpdateOutputText(clean);
+            // Clean error text box
+            UpdateOutputText(clean, error: true);
+            // Clean output textr box
+            UpdateOutputText(clean, error: false);
         }
 
         private void Process_Output(object sender, RunnerReceivedEventArgs e, bool error)
