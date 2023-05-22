@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 
 namespace Runner
@@ -10,6 +11,8 @@ namespace Runner
         public static int SizeHeight { get; set; } = 0;
         public static int LocationX { get; set; } = 0;
         public static int LocationY { get; set; } = 0;
+
+        public static Version Version { get; set; } = Program.ExecutableVersion;
 
         public static string Executable { get; set; } = "";
         public static string Arguments { get; set; } = "";
@@ -48,6 +51,7 @@ namespace Runner
                         stream.WriteLine(nameof(SizeHeight) + "=" + SizeHeight);
                         stream.WriteLine(nameof(LocationX) + "=" + LocationX);
                         stream.WriteLine(nameof(LocationY) + "=" + LocationY);
+                        stream.WriteLine(nameof(Version) + "=" + Version);
                         stream.WriteLine(nameof(Executable) + "=" + Executable);
                         stream.WriteLine(nameof(Arguments) + "=" + Arguments);
                     }
@@ -104,6 +108,10 @@ namespace Runner
                             case nameof(LocationY):
                                 // Set form y position
                                 LocationY = int.Parse(value.Trim());
+                                break;
+                            case nameof(Version):
+                                // Set current version
+                                Version = new Version(value.Trim());
                                 break;
                             case nameof(Executable):
                                 // Set file to execute

@@ -1,5 +1,5 @@
 using System;
-using System.Drawing;
+using System.Diagnostics;
 using System.Net;
 using System.Windows.Forms;
 
@@ -27,9 +27,19 @@ namespace Runner
 
         private void UpdaterForm_Load(object sender, EventArgs e)
         {
+            if (Settings.Version < Program.ExecutableVersion)
+            {
+                MessageBox.Show("Software aggiornato alla versione \"" + Program.ExecutableVersion + "\"!", "Aggiornamento", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Update current version
+                Settings.Version = Program.ExecutableVersion;
+                // Save settigns
+                Settings.Save();
+            }
+
             if (!Updater.Update())
             {
-                MessageBox.Show("Impossibile verificare aggiornamenti", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Impossibile verificare aggiornamenti...", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 // Close form
                 Close();
@@ -42,24 +52,21 @@ namespace Runner
             {
                 try
                 {
-                    var update = "Scaricata nuova versione \"" + e.FileVersion + "\"" + Environment.NewLine + Environment.NewLine + "Vuoi applicare ora l'aggiornamento?";
+                    // Create process
+                    Runner.Create(e.FilePath, "");
 
-                    if (MessageBox.Show(update, "Aggiornamento scaricato", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    // Start process
+                    if (Runner.Start())
                     {
-                        // Create process
-                        Runner.Create(e.FilePath, "");
-
-                        // Start process
-                        if (Runner.Start())
-                        {
-                            // Set restart needed
-                            Program.NeedRestart = true;
-                        }
-                        else
-                        {
-                            var error = Environment.NewLine + Environment.NewLine + Runner.LastError;
-                            MessageBox.Show(("Impossibile avviare il processo!" + error).Trim(), "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                        // Set restart needed
+                        Program.NeedRestart = true;
+                        // Kill current process
+                        Process.GetCurrentProcess().Kill();
+                    }
+                    else
+                    {
+                        var error = Environment.NewLine + Environment.NewLine + Runner.LastError;
+                        MessageBox.Show(("Impossibile avviare nuova versione!" + error).Trim(), "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception ex)
@@ -71,7 +78,7 @@ namespace Runner
             if (e.Error != null)
             {
                 var error = Environment.NewLine + Environment.NewLine + e.Error.Message;
-                MessageBox.Show(("Errore scaricamento nuova versione!" + error).Trim(), "Errore aggiornamento", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(("Errore scaricamento nuova versione!" + error).Trim(), "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             Close();
