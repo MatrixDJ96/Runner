@@ -2,31 +2,13 @@ namespace Runner
 {
     partial class UpdaterForm
     {
-        /// <summary>
-        /// Variabile di progettazione necessaria.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        #region Windows Form Designer generated code
 
         /// <summary>
-        /// Pulire le risorse in uso.
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
-        /// <param name="disposing">ha valore true se le risorse gestite devono essere eliminate, false in caso contrario.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        #region Codice generato da Progettazione Windows Form
-
-        /// <summary>
-        /// Metodo necessario per il supporto della finestra di progettazione. Non modificare
-        /// il contenuto del metodo con l'editor di codice.
-        /// </summary>
-        private void InitializeComponent()
+        protected override void InitializeComponent()
         {
             this.MainPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.DownloadProgressBar = new System.Windows.Forms.ProgressBar();

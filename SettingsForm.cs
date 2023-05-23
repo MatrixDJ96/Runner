@@ -3,18 +3,10 @@ using System.Windows.Forms;
 
 namespace Runner
 {
-    public partial class SettingsForm : Form
+    public partial class SettingsForm : BaseForm
     {
         // Define whether the settings have been updated
         public bool Updated { get; set; } = false;
-
-        public SettingsForm()
-        {
-            InitializeComponent();
-
-            // Set application icon to form
-            Icon = Program.ExecutableIcon;
-        }
 
         private void UpdateComponents(bool width = true)
         {
