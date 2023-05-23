@@ -29,10 +29,10 @@ namespace Runner
         private void InitializeComponent()
         {
             this.TopPanel = new System.Windows.Forms.Panel();
-            this.FullExecutableLabel = new System.Windows.Forms.Label();
+            this.SettingsButton = new System.Windows.Forms.Button();
             this.FillPanel = new System.Windows.Forms.Panel();
-            this.ErrorTextBox = new System.Windows.Forms.RichTextBox();
             this.OutputTextBox = new System.Windows.Forms.RichTextBox();
+            this.ErrorTextBox = new System.Windows.Forms.RichTextBox();
             this.RightPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.StartButton = new System.Windows.Forms.Button();
             this.StopButton = new System.Windows.Forms.Button();
@@ -46,66 +46,71 @@ namespace Runner
             // 
             this.TopPanel.AutoSize = true;
             this.TopPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.TopPanel.Controls.Add(this.FullExecutableLabel);
+            this.TopPanel.Controls.Add(this.SettingsButton);
             this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.TopPanel.Location = new System.Drawing.Point(0, 0);
+            this.TopPanel.Margin = new System.Windows.Forms.Padding(0);
             this.TopPanel.Name = "TopPanel";
-            this.TopPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.TopPanel.Size = new System.Drawing.Size(800, 31);
+            this.TopPanel.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
+            this.TopPanel.Size = new System.Drawing.Size(800, 43);
             this.TopPanel.TabIndex = 0;
             // 
-            // FullExecutableLabel
+            // SettingsButton
             // 
-            this.FullExecutableLabel.AutoSize = true;
-            this.FullExecutableLabel.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.FullExecutableLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.FullExecutableLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.FullExecutableLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FullExecutableLabel.Location = new System.Drawing.Point(5, 5);
-            this.FullExecutableLabel.Name = "FullExecutableLabel";
-            this.FullExecutableLabel.Padding = new System.Windows.Forms.Padding(3);
-            this.FullExecutableLabel.Size = new System.Drawing.Size(216, 21);
-            this.FullExecutableLabel.TabIndex = 0;
-            this.FullExecutableLabel.Text = "Clicca qui per selezionare un file eseguibile";
-            this.FullExecutableLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.FullExecutableLabel.Click += new System.EventHandler(this.ExecutableLabel_Click);
+            this.SettingsButton.AutoSize = true;
+            this.SettingsButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.SettingsButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SettingsButton.Enabled = false;
+            this.SettingsButton.Location = new System.Drawing.Point(10, 5);
+            this.SettingsButton.Margin = new System.Windows.Forms.Padding(0);
+            this.SettingsButton.Name = "SettingsButton";
+            this.SettingsButton.Padding = new System.Windows.Forms.Padding(5);
+            this.SettingsButton.Size = new System.Drawing.Size(780, 33);
+            this.SettingsButton.TabIndex = 0;
+            this.SettingsButton.Text = "Clicca qui per selezionare un file eseguibile";
+            this.SettingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
             // 
             // FillPanel
             // 
             this.FillPanel.AutoSize = true;
             this.FillPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.FillPanel.Controls.Add(this.ErrorTextBox);
             this.FillPanel.Controls.Add(this.OutputTextBox);
+            this.FillPanel.Controls.Add(this.ErrorTextBox);
             this.FillPanel.Controls.Add(this.RightPanel);
             this.FillPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FillPanel.Location = new System.Drawing.Point(0, 31);
+            this.FillPanel.Location = new System.Drawing.Point(0, 43);
+            this.FillPanel.Margin = new System.Windows.Forms.Padding(0);
             this.FillPanel.Name = "FillPanel";
-            this.FillPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.FillPanel.Size = new System.Drawing.Size(800, 419);
+            this.FillPanel.Padding = new System.Windows.Forms.Padding(10, 5, 5, 5);
+            this.FillPanel.Size = new System.Drawing.Size(800, 407);
             this.FillPanel.TabIndex = 1;
+            // 
+            // OutputTextBox
+            // 
+            this.OutputTextBox.BackColor = System.Drawing.Color.White;
+            this.OutputTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.OutputTextBox.Location = new System.Drawing.Point(10, 5);
+            this.OutputTextBox.Margin = new System.Windows.Forms.Padding(0);
+            this.OutputTextBox.Name = "OutputTextBox";
+            this.OutputTextBox.ReadOnly = true;
+            this.OutputTextBox.Size = new System.Drawing.Size(685, 397);
+            this.OutputTextBox.TabIndex = 1;
+            this.OutputTextBox.TabStop = false;
+            this.OutputTextBox.Text = "";
             // 
             // ErrorTextBox
             // 
             this.ErrorTextBox.BackColor = System.Drawing.Color.White;
             this.ErrorTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ErrorTextBox.ForeColor = System.Drawing.Color.Red;
-            this.ErrorTextBox.Location = new System.Drawing.Point(5, 5);
+            this.ErrorTextBox.Location = new System.Drawing.Point(10, 5);
+            this.ErrorTextBox.Margin = new System.Windows.Forms.Padding(0);
             this.ErrorTextBox.Name = "ErrorTextBox";
             this.ErrorTextBox.ReadOnly = true;
-            this.ErrorTextBox.Size = new System.Drawing.Size(699, 409);
-            this.ErrorTextBox.TabIndex = 1;
+            this.ErrorTextBox.Size = new System.Drawing.Size(685, 397);
+            this.ErrorTextBox.TabIndex = 0;
+            this.ErrorTextBox.TabStop = false;
             this.ErrorTextBox.Text = "";
-            // 
-            // OutputTextBox
-            // 
-            this.OutputTextBox.BackColor = System.Drawing.Color.White;
-            this.OutputTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.OutputTextBox.Location = new System.Drawing.Point(5, 5);
-            this.OutputTextBox.Name = "OutputTextBox";
-            this.OutputTextBox.ReadOnly = true;
-            this.OutputTextBox.Size = new System.Drawing.Size(699, 409);
-            this.OutputTextBox.TabIndex = 2;
-            this.OutputTextBox.Text = "";
             // 
             // RightPanel
             // 
@@ -116,9 +121,10 @@ namespace Runner
             this.RightPanel.Controls.Add(this.ErrorButton);
             this.RightPanel.Dock = System.Windows.Forms.DockStyle.Right;
             this.RightPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.RightPanel.Location = new System.Drawing.Point(704, 5);
+            this.RightPanel.Location = new System.Drawing.Point(695, 5);
+            this.RightPanel.Margin = new System.Windows.Forms.Padding(0);
             this.RightPanel.Name = "RightPanel";
-            this.RightPanel.Size = new System.Drawing.Size(91, 409);
+            this.RightPanel.Size = new System.Drawing.Size(100, 397);
             this.RightPanel.TabIndex = 2;
             // 
             // StartButton
@@ -127,7 +133,8 @@ namespace Runner
             this.StartButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.StartButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.StartButton.Enabled = false;
-            this.StartButton.Location = new System.Drawing.Point(3, 3);
+            this.StartButton.Location = new System.Drawing.Point(10, 0);
+            this.StartButton.Margin = new System.Windows.Forms.Padding(10, 0, 5, 5);
             this.StartButton.Name = "StartButton";
             this.StartButton.Padding = new System.Windows.Forms.Padding(5);
             this.StartButton.Size = new System.Drawing.Size(85, 33);
@@ -141,7 +148,8 @@ namespace Runner
             this.StopButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.StopButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.StopButton.Enabled = false;
-            this.StopButton.Location = new System.Drawing.Point(3, 42);
+            this.StopButton.Location = new System.Drawing.Point(10, 38);
+            this.StopButton.Margin = new System.Windows.Forms.Padding(10, 0, 5, 5);
             this.StopButton.Name = "StopButton";
             this.StopButton.Padding = new System.Windows.Forms.Padding(5);
             this.StopButton.Size = new System.Drawing.Size(85, 33);
@@ -155,7 +163,8 @@ namespace Runner
             this.ErrorButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ErrorButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ErrorButton.Enabled = false;
-            this.ErrorButton.Location = new System.Drawing.Point(3, 81);
+            this.ErrorButton.Location = new System.Drawing.Point(10, 76);
+            this.ErrorButton.Margin = new System.Windows.Forms.Padding(10, 0, 5, 5);
             this.ErrorButton.Name = "ErrorButton";
             this.ErrorButton.Padding = new System.Windows.Forms.Padding(5);
             this.ErrorButton.Size = new System.Drawing.Size(85, 33);
@@ -170,8 +179,7 @@ namespace Runner
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.FillPanel);
             this.Controls.Add(this.TopPanel);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.MinimumSize = new System.Drawing.Size(400, 200);
+            this.MinimumSize = new System.Drawing.Size(400, 225);
             this.Name = "RunnerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Runner";
@@ -191,7 +199,7 @@ namespace Runner
         #endregion
 
         private System.Windows.Forms.Panel TopPanel;
-        private System.Windows.Forms.Label FullExecutableLabel;
+        private System.Windows.Forms.Button SettingsButton;
         private System.Windows.Forms.Panel FillPanel;
         private System.Windows.Forms.RichTextBox ErrorTextBox;
         private System.Windows.Forms.RichTextBox OutputTextBox;
@@ -201,4 +209,3 @@ namespace Runner
         private System.Windows.Forms.Button ErrorButton;
     }
 }
-
