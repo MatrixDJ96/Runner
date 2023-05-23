@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace Runner
 {
-    public partial class RunnerForm : Form
+    public partial class RunnerForm : BaseForm
     {
         private string DefaultExecutableText { get; set; } = "";
 
@@ -14,8 +14,6 @@ namespace Runner
 
         public RunnerForm()
         {
-            InitializeComponent();
-
             // Set output text box visible on start
             Runner.Started += (s, e) => ShowOutputText(true, true);
 
@@ -26,9 +24,6 @@ namespace Runner
             // Process error and output data
             Runner.ErrorDataReceived += (s, e) => Process_Output(s, e, true);
             Runner.OutputDataReceived += (s, e) => Process_Output(s, e, false);
-
-            // Set application icon to form
-            Icon = Program.ExecutableIcon;
 
             // Set default text of file to execute label
             DefaultExecutableText = SettingsButton.Text;

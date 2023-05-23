@@ -5,15 +5,13 @@ using System.Windows.Forms;
 
 namespace Runner
 {
-    public partial class UpdaterForm : Form
+    public partial class UpdaterForm : BaseForm
     {
         private Updater Updater { get; set; } = new Updater();
         private Runner Runner { get; set; } = new Runner();
 
         public UpdaterForm()
         {
-            InitializeComponent();
-            
             // Set event listener
             Updater.DownloadCompleted += (s, e) => Hide();
             Updater.DownloadCompleted += Updater_DownloadCompleted;
