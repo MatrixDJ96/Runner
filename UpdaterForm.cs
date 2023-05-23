@@ -13,16 +13,27 @@ namespace Runner
         public UpdaterForm()
         {
             InitializeComponent();
-
-            // Set event listner
+            
+            // Set event listener
             Updater.DownloadCompleted += (s, e) => Hide();
             Updater.DownloadCompleted += Updater_DownloadCompleted;
 
             Updater.DownloadProgressChanged += (s, e) => Activate();
             Updater.DownloadProgressChanged += Updater_DownloadProgressChanged;
+        }
 
-            // Set application icon to form
-            Icon = Program.ExecutableIcon;
+        private void CloseWhenVisible()
+        {
+            if (!Visible)
+            {
+                // Close form when visible changed
+                VisibleChanged += (s, _) => Close();
+            }
+            else
+            {
+                // Close form
+                Close();
+            }
         }
 
         private void UpdaterForm_Load(object sender, EventArgs e)
@@ -33,7 +44,7 @@ namespace Runner
 
                 // Update current version
                 Settings.Version = Program.ExecutableVersion;
-                // Save settigns
+                // Save settings
                 Settings.Save();
             }
 
@@ -42,7 +53,7 @@ namespace Runner
                 MessageBox.Show("Impossibile verificare aggiornamenti...", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 // Close form
-                Close();
+                CloseWhenVisible();
             }
         }
 
@@ -81,7 +92,8 @@ namespace Runner
                 MessageBox.Show(("Errore scaricamento nuova versione!" + error).Trim(), "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            Close();
+            // Close form
+            CloseWhenVisible();
         }
 
         private void Updater_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
@@ -95,7 +107,7 @@ namespace Runner
             Updater.Cancel();
 
             // Close form
-            Close();
+            CloseWhenVisible();
         }
     }
 }

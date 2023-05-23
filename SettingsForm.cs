@@ -1,5 +1,4 @@
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace Runner
@@ -49,8 +48,8 @@ namespace Runner
             }
 
             // Update file to execute textbox width
-            ExecutableTextBox.Width = Math.Max(TextRenderer.MeasureText(ExecutableTextBox.Text, ExecutableTextBox.Font).Width, 200);
-            ArgumentTextBox.Width = Math.Max(TextRenderer.MeasureText(ArgumentTextBox.Text, ArgumentTextBox.Font).Width, 200);
+            ExecutableTextBox.Width = Math.Max(TextRenderer.MeasureText(ExecutableTextBox.Text, ExecutableTextBox.Font).Width + (int)ExecutableTextBox.Font.Size, ExecutableTextBox.MinimumSize.Width);
+            ArgumentTextBox.Width = Math.Max(TextRenderer.MeasureText(ArgumentTextBox.Text, ArgumentTextBox.Font).Width + (int)ExecutableTextBox.Font.Size, ExecutableTextBox.MinimumSize.Width);
         }
 
         public static bool SelectFileToExecute(out string filename)
@@ -84,7 +83,7 @@ namespace Runner
             UpdateComponents();
         }
 
-        private void FileToExecuteTextBox_Click(object sender, EventArgs e)
+        private void ExecutableLabel_Click(object sender, EventArgs e)
         {
             if (SelectFileToExecute(out var filename))
             {
@@ -108,7 +107,7 @@ namespace Runner
             }
         }
 
-        private void FileToExecuteTextBox_TextChanged(object sender, EventArgs e)
+        private void ExecutableTextBox_TextChanged(object sender, EventArgs e)
         {
             // Update components width
             UpdateComponentsWidth();

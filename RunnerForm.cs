@@ -31,7 +31,7 @@ namespace Runner
             Icon = Program.ExecutableIcon;
 
             // Set default text of file to execute label
-            DefaultExecutableText = FullExecutableLabel.Text;
+            DefaultExecutableText = SettingsButton.Text;
 
             // Add version on form title
             Text += " v" + Program.ExecutableVersion;
@@ -52,8 +52,8 @@ namespace Runner
             StopButton.Enabled = !Settings.Executable.IsEmpty() && Runner.IsRunning;
 
             // Update file to execute label
-            FullExecutableLabel.Text = !Settings.Executable.IsEmpty() ? Settings.FullExecutable : DefaultExecutableText;
-            FullExecutableLabel.Enabled = Settings.Executable.IsEmpty() || StartButton.Enabled;
+            SettingsButton.Text = !Settings.Executable.IsEmpty() ? Settings.FullExecutable : DefaultExecutableText;
+            SettingsButton.Enabled = Settings.Executable.IsEmpty() || StartButton.Enabled;
         }
 
         private void UpdateOutputText(bool clean, string output = null, bool error = false)
@@ -197,7 +197,7 @@ namespace Runner
             Settings.Save();
         }
 
-        private void ExecutableLabel_Click(object sender, EventArgs e)
+        private void SettingsButton_Click(object sender, EventArgs e)
         {
             // Select new file to execute
             if (SettingsForm.ShowDialog(this) == DialogResult.OK)
