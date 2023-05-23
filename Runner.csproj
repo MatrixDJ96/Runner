@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -53,31 +53,44 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Program.cs" />
     <Compile Include="Runner.cs" />
     <Compile Include="RunnerEvent.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="StringExtensions.cs" />
+    <Compile Include="Updater.cs" />
+    <Compile Include="UpdaterEvent.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="RunnerForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="RunnerForm.Designer.cs">
       <DependentUpon>RunnerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings.cs" />
+    <EmbeddedResource Include="RunnerForm.resx">
+      <DependentUpon>RunnerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <Compile Include="SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <Compile Include="UpdaterForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Updater.cs" />
-    <Compile Include="UpdaterEvent.cs" />
     <Compile Include="UpdaterForm.Designer.cs">
       <DependentUpon>UpdaterForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="StringExtensions.cs" />
-    <Compile Include="Program.cs" />
+    <EmbeddedResource Include="UpdaterForm.resx">
+      <DependentUpon>UpdaterForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -88,16 +101,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="RunnerForm.resx">
-      <DependentUpon>RunnerForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SettingsForm.resx">
-      <DependentUpon>SettingsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UpdaterForm.resx">
-      <DependentUpon>UpdaterForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <None Include="App.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -110,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="App.manifest" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Runner.ico" />

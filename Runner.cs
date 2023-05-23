@@ -41,7 +41,7 @@ namespace Runner
         {
             if (Started != null)
             {
-                // Invoke listners
+                // Invoke listeners
                 Started(this, EventArgs.Empty);
             }
         }
@@ -122,7 +122,7 @@ namespace Runner
                     }
                 };
 
-                // Set exited event listner
+                // Set exited event listener
                 Process.Exited += Exited;
                 Process.Exited += (s, e) => Process = null;
 
