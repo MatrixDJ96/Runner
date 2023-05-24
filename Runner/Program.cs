@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace Runner
@@ -11,19 +12,19 @@ namespace Runner
         public static bool NeedRestart { get; set; } = false;
 
         // Name of the current executable
-        public static string ExecutableName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
+        public static readonly string ExecutableName = Assembly.GetExecutingAssembly().GetName().Name;
 
         // Version of the current executable
-        public static Version ExecutableVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+        public static readonly Version ExecutableVersion = Assembly.GetExecutingAssembly().GetName().Version;
 
         // Full path of the current executable
-        public static string ExecutablePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+        public static readonly string ExecutablePath = Assembly.GetExecutingAssembly().Location;
 
         // Icon of the current executable
-        public static Icon ExecutableIcon = Icon.ExtractAssociatedIcon(ExecutablePath);
+        public static readonly Icon ExecutableIcon = Icon.ExtractAssociatedIcon(ExecutablePath);
 
         // Full path of the program settings
-        public static string SettingsPath = Path.Combine(
+        public static readonly string SettingsPath = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
             ExecutableName,
             "Settings.ini"
