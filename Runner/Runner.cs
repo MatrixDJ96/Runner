@@ -61,7 +61,7 @@ namespace Runner
         private void ReadDataFromStream(StreamReader reader, bool error)
         {
             // Define size of memory block
-            var blockSize = 100;
+            var blockSize = 1024;
 
             while (!reader.EndOfStream)
             {
