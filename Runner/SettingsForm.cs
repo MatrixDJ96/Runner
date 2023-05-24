@@ -20,7 +20,7 @@ namespace Runner
 
             // Update file to execute textbox value
             ExecutableTextBox.Text = Settings.Executable;
-            ArgumentTextBox.Text = Settings.Arguments;
+            ArgumentsTextBox.Text = Settings.Arguments;
 
             if (width)
             {
@@ -41,7 +41,7 @@ namespace Runner
 
             // Update file to execute textbox width
             ExecutableTextBox.Width = Math.Max(TextRenderer.MeasureText(ExecutableTextBox.Text, ExecutableTextBox.Font).Width + (int)ExecutableTextBox.Font.Size, ExecutableTextBox.MinimumSize.Width);
-            ArgumentTextBox.Width = Math.Max(TextRenderer.MeasureText(ArgumentTextBox.Text, ArgumentTextBox.Font).Width + (int)ExecutableTextBox.Font.Size, ExecutableTextBox.MinimumSize.Width);
+            ArgumentsTextBox.Width = Math.Max(TextRenderer.MeasureText(ArgumentsTextBox.Text, ArgumentsTextBox.Font).Width + (int)ExecutableTextBox.Font.Size, ExecutableTextBox.MinimumSize.Width);
         }
 
         public static bool SelectFileToExecute(out string filename)
@@ -75,7 +75,7 @@ namespace Runner
             UpdateComponents();
         }
 
-        private void ExecutableLabel_Click(object sender, EventArgs e)
+        private void ExecutableButton_Click(object sender, EventArgs e)
         {
             if (SelectFileToExecute(out var filename))
             {
@@ -87,7 +87,7 @@ namespace Runner
             }
         }
 
-        private void ArgumentLabel_Click(object sender, EventArgs e)
+        private void ArgumentsButton_Click(object sender, EventArgs e)
         {
             if (SelectFileToExecute(out var filename))
             {
@@ -108,13 +108,13 @@ namespace Runner
             Settings.Executable = ExecutableTextBox.Text;
         }
 
-        private void ArgumentTextBox_TextChanged(object sender, EventArgs e)
+        private void ArgumentsTextBox_TextChanged(object sender, EventArgs e)
         {
             // Update components width
             UpdateComponentsWidth();
 
             // Update argument setting
-            Settings.Arguments = ArgumentTextBox.Text;
+            Settings.Arguments = ArgumentsTextBox.Text;
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
