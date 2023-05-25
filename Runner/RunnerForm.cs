@@ -166,8 +166,9 @@ namespace Runner
             }
             else
             {
-                // Save default size and location
+                // Set first run to false
                 Settings.FirstRun = false;
+                // Save current size and position
                 RunnerForm_ResizeEnd(sender, e);
             }
 
@@ -177,6 +178,7 @@ namespace Runner
             // Update GUI
             UpdateComponents();
             UpdateOutputText(true);
+            ShowOutputText(true, true);
         }
 
         private void RunnerForm_ResizeEnd(object sender, EventArgs e)
@@ -189,6 +191,7 @@ namespace Runner
             Settings.LocationX = Location.X;
             Settings.LocationY = Location.Y;
 
+            // Save settings
             Settings.Save();
         }
 
