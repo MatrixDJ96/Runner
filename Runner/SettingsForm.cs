@@ -39,9 +39,13 @@ namespace Runner
                 return;
             }
 
+            // Calculate file to execute textbox width
+            var executableWidth = TextRenderer.MeasureText(ExecutableTextBox.Text, ExecutableTextBox.Font).Width + (int)ExecutableTextBox.Font.Size;
+            var argumentsWidth = TextRenderer.MeasureText(ArgumentsTextBox.Text, ArgumentsTextBox.Font).Width + (int)ExecutableTextBox.Font.Size;
+
             // Update file to execute textbox width
-            ExecutableTextBox.Width = Math.Max(TextRenderer.MeasureText(ExecutableTextBox.Text, ExecutableTextBox.Font).Width + (int)ExecutableTextBox.Font.Size, ExecutableTextBox.MinimumSize.Width);
-            ArgumentsTextBox.Width = Math.Max(TextRenderer.MeasureText(ArgumentsTextBox.Text, ArgumentsTextBox.Font).Width + (int)ExecutableTextBox.Font.Size, ExecutableTextBox.MinimumSize.Width);
+            ExecutableTextBox.Width = Math.Max(Math.Max(executableWidth, argumentsWidth), ExecutableTextBox.MinimumSize.Width);
+            ArgumentsTextBox.Width = Math.Max(Math.Max(executableWidth, argumentsWidth), ArgumentsTextBox.MinimumSize.Width);
         }
 
         public static bool SelectFile(out string filename)
