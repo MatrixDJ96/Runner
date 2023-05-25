@@ -192,7 +192,7 @@ namespace Runner
             Settings.LocationY = Location.Y;
 
             // Save settings
-            Settings.Save();
+            Settings.Save(delay: true);
         }
 
         private void SettingsButton_Click(object sender, EventArgs e)

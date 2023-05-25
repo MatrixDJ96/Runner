@@ -1,10 +1,14 @@
 using System;
 using System.IO;
+using System.Threading;
 
 namespace Runner
 {
     internal class Settings
     {
+        // Thread to save settings when asked with delay
+        private static Thread SaveThread { get; set; } = null;
+
         public static bool FirstRun { get; set; } = true;
 
         public static int SizeWidth { get; set; } = 0;
@@ -19,7 +23,7 @@ namespace Runner
 
         public static string FullExecutable { get => (Executable + " " + Arguments).Trim(); }
 
-        public static bool Save(bool clean = true)
+        private static bool SaveInternal(bool clean)
         {
             var result = false;
 
@@ -62,6 +66,40 @@ namespace Runner
             catch { }
 
             return result;
+        }
+
+        public static bool Save(bool clean = true, bool delay = false)
+        {
+            // Check if thread is alive
+            if (SaveThread?.IsAlive ?? false)
+            {
+                // Abort previous thread
+                SaveThread.Abort();
+            }
+
+            if (delay)
+            {
+                // Thread to save settings after 1 second
+                SaveThread = new Thread(() =>
+                {
+                    // Try to save settings
+                    try
+                    {
+                        // Wait 1 second
+                        Thread.Sleep(1000);
+                        // Save settings
+                        SaveInternal(clean);
+                    }
+                    catch { }
+                });
+
+                // Start thread
+                SaveThread.Start();
+
+                return true;
+            }
+
+            return SaveInternal(clean);
         }
 
         public static bool Load()
