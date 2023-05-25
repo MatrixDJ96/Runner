@@ -54,6 +54,9 @@ namespace Runner
                 // Start runner form
                 Application.Run(new RunnerForm());
             }
+
+            // Save settings
+            Settings.Save();
         }
     }
 }
