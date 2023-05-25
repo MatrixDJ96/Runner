@@ -167,8 +167,8 @@ namespace Runner
             {
                 // Apply saved location
                 Location = new Point(
-                    Settings.LocationX,
-                    Settings.LocationY
+                    Settings.LocationX * DeviceDpi / 96,
+                    Settings.LocationY * DeviceDpi / 96
                 );
 
                 // Apply saved size
@@ -197,12 +197,12 @@ namespace Runner
         private void RunnerForm_ResizeEnd(object sender, EventArgs e)
         {
             // Get form size
-            Settings.SizeWidth = Size.Width / DeviceDpi * 96;
-            Settings.SizeHeight = Size.Height / DeviceDpi * 96;
+            Settings.SizeWidth = Size.Width * 96 / DeviceDpi;
+            Settings.SizeHeight = Size.Height * 96 / DeviceDpi;
 
             // Get form location
-            Settings.LocationX = Location.X;
-            Settings.LocationY = Location.Y;
+            Settings.LocationX = Location.X * 96 / DeviceDpi;
+            Settings.LocationY = Location.Y * 96 / DeviceDpi;
 
             // Save settings
             Settings.Save(delay: true);
