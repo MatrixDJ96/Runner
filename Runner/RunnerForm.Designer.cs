@@ -42,7 +42,6 @@ namespace Runner
             this.SettingsButton.AutoSize = true;
             this.SettingsButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.SettingsButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SettingsButton.Enabled = false;
             this.SettingsButton.Location = new System.Drawing.Point(10, 5);
             this.SettingsButton.Margin = new System.Windows.Forms.Padding(0);
             this.SettingsButton.Name = "SettingsButton";
@@ -114,7 +113,6 @@ namespace Runner
             this.StartButton.AutoSize = true;
             this.StartButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.StartButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.StartButton.Enabled = false;
             this.StartButton.Location = new System.Drawing.Point(10, 0);
             this.StartButton.Margin = new System.Windows.Forms.Padding(10, 0, 5, 5);
             this.StartButton.Name = "StartButton";
@@ -129,7 +127,6 @@ namespace Runner
             this.StopButton.AutoSize = true;
             this.StopButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.StopButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.StopButton.Enabled = false;
             this.StopButton.Location = new System.Drawing.Point(10, 38);
             this.StopButton.Margin = new System.Windows.Forms.Padding(10, 0, 5, 5);
             this.StopButton.Name = "StopButton";
@@ -144,9 +141,8 @@ namespace Runner
             this.ErrorButton.AutoSize = true;
             this.ErrorButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ErrorButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ErrorButton.Enabled = false;
             this.ErrorButton.Location = new System.Drawing.Point(10, 76);
-            this.ErrorButton.Margin = new System.Windows.Forms.Padding(10, 0, 5, 5);
+            this.ErrorButton.Margin = new System.Windows.Forms.Padding(10, 0, 5, 0);
             this.ErrorButton.Name = "ErrorButton";
             this.ErrorButton.Padding = new System.Windows.Forms.Padding(5);
             this.ErrorButton.Size = new System.Drawing.Size(85, 33);
