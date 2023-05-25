@@ -14,6 +14,11 @@ namespace Runner
 
         public RunnerForm()
         {
+#if DEBUG
+            // Update counter text on counter increased
+            Settings.CounterIncreased += (s, e) => UpdateComponents();
+#endif
+
             // Set output text box visible on start
             Runner.Started += (s, e) => ShowOutputText(true, true);
 
@@ -49,6 +54,14 @@ namespace Runner
             // Update file to execute label
             SettingsButton.Text = !Settings.Executable.IsEmpty() ? Settings.FullExecutable : DefaultExecutableText;
             SettingsButton.Enabled = Settings.Executable.IsEmpty() || StartButton.Enabled;
+
+#if DEBUG
+            // Update counter text with counter value
+            CounterText.Text = Settings.Counter != 0 ? "Salvataggi: " + Settings.Counter.ToString() : "";
+#else
+            // Hide counter text
+            CounterText.Visible = false;
+#endif
         }
 
         private void UpdateOutputText(bool clean, string output = null, bool error = false)

@@ -19,6 +19,7 @@ namespace Runner
             this.StartButton = new System.Windows.Forms.Button();
             this.StopButton = new System.Windows.Forms.Button();
             this.ErrorButton = new System.Windows.Forms.Button();
+            this.CounterText = new System.Windows.Forms.Label();
             this.TopPanel.SuspendLayout();
             this.FillPanel.SuspendLayout();
             this.RightPanel.SuspendLayout();
@@ -100,6 +101,7 @@ namespace Runner
             this.RightPanel.Controls.Add(this.StartButton);
             this.RightPanel.Controls.Add(this.StopButton);
             this.RightPanel.Controls.Add(this.ErrorButton);
+            this.RightPanel.Controls.Add(this.CounterText);
             this.RightPanel.Dock = System.Windows.Forms.DockStyle.Right;
             this.RightPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.RightPanel.Location = new System.Drawing.Point(695, 5);
@@ -150,6 +152,17 @@ namespace Runner
             this.ErrorButton.Text = "Mostra errori";
             this.ErrorButton.Click += new System.EventHandler(this.ErrorButton_Click);
             // 
+            // CounterText
+            // 
+            this.CounterText.AutoSize = true;
+            this.CounterText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CounterText.Location = new System.Drawing.Point(10, 119);
+            this.CounterText.Margin = new System.Windows.Forms.Padding(10, 10, 5, 0);
+            this.CounterText.Name = "CounterText";
+            this.CounterText.Size = new System.Drawing.Size(85, 13);
+            this.CounterText.TabIndex = 3;
+            this.CounterText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // RunnerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -185,5 +198,6 @@ namespace Runner
         private System.Windows.Forms.Button StartButton;
         private System.Windows.Forms.Button StopButton;
         private System.Windows.Forms.Button ErrorButton;
+        private System.Windows.Forms.Label CounterText;
     }
 }

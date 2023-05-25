@@ -6,6 +6,11 @@ namespace Runner
 {
     internal class Settings
     {
+        // Number of times the program has saved settings
+        public static int Counter { get; set; } = 0;
+        // Event to invoke when counter is increased
+        public static event EventHandler CounterIncreased;
+
         // Thread to save settings when asked with delay
         private static Thread SaveThread { get; set; } = null;
 
@@ -22,6 +27,14 @@ namespace Runner
         public static string Arguments { get; set; } = "";
 
         public static string FullExecutable { get => (Executable + " " + Arguments).Trim(); }
+
+        public static void OnCounterIncreased()
+        {
+            // Increase counter
+            Counter++;
+            // Invoke event listeners
+            CounterIncreased?.Invoke(null, EventArgs.Empty);
+        }
 
         private static bool SaveInternal(bool clean)
         {
@@ -59,6 +72,9 @@ namespace Runner
                         stream.WriteLine(nameof(Executable) + "=" + Executable);
                         stream.WriteLine(nameof(Arguments) + "=" + Arguments);
                     }
+
+                    // Increase counter
+                    OnCounterIncreased();
                 }
 
                 result = true;
