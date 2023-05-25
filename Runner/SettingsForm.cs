@@ -44,7 +44,7 @@ namespace Runner
             ArgumentsTextBox.Width = Math.Max(TextRenderer.MeasureText(ArgumentsTextBox.Text, ArgumentsTextBox.Font).Width + (int)ExecutableTextBox.Font.Size, ExecutableTextBox.MinimumSize.Width);
         }
 
-        public static bool SelectFileToExecute(out string filename)
+        public static bool SelectFile(out string filename)
         {
             filename = null;
 
@@ -52,7 +52,7 @@ namespace Runner
             {
                 openFileDialog.RestoreDirectory = true;
                 openFileDialog.DereferenceLinks = true;
-                openFileDialog.Title = "Seleziona il file da eseguire";
+                openFileDialog.Title = "Seleziona un file";
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
@@ -77,7 +77,7 @@ namespace Runner
 
         private void ExecutableButton_Click(object sender, EventArgs e)
         {
-            if (SelectFileToExecute(out var filename))
+            if (SelectFile(out var filename))
             {
                 // Set new executable
                 Settings.Executable = filename;
@@ -89,7 +89,7 @@ namespace Runner
 
         private void ArgumentsButton_Click(object sender, EventArgs e)
         {
-            if (SelectFileToExecute(out var filename))
+            if (SelectFile(out var filename))
             {
                 // Set new arguments
                 Settings.Arguments = filename;
