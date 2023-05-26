@@ -194,6 +194,12 @@ namespace Runner
             ShowOutputText(true, true);
         }
 
+        private void RunnerForm_ResizeBegin(object sender, EventArgs e)
+        {
+            // Stop settings save
+            Settings.AbortSave();
+        }
+
         private void RunnerForm_ResizeEnd(object sender, EventArgs e)
         {
             // Get form size
@@ -204,8 +210,8 @@ namespace Runner
             Settings.LocationX = Location.X * 96 / DeviceDpi;
             Settings.LocationY = Location.Y * 96 / DeviceDpi;
 
-            // Save settings
-            Settings.Save(delay: true);
+            // Start save settings
+            Settings.StartSave();
         }
 
         private void SettingsButton_Click(object sender, EventArgs e)

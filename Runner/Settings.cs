@@ -13,6 +13,8 @@ namespace Runner
 
         // Thread to save settings when asked with delay
         private static Thread SaveThread { get; set; } = null;
+        // Determines if settings are going to be saved or not
+        public static bool IsSaving { get => SaveThread?.IsAlive ?? false; }
 
         public static bool FirstRun { get; set; } = true;
 
@@ -84,36 +86,46 @@ namespace Runner
             return result;
         }
 
-        public static bool Save(bool clean = true, bool delay = false)
+        public static void AbortSave()
         {
             // Check if thread is alive
-            if (SaveThread?.IsAlive ?? false)
+            if (IsSaving)
             {
                 // Abort previous thread
                 SaveThread.Abort();
             }
+        }
 
-            if (delay)
+        public static bool StartSave(bool clean = true)
+        {
+            // Abort previous save (if any)
+            AbortSave();
+
+            // Thread to save settings after 1 second
+            SaveThread = new Thread(() =>
             {
-                // Thread to save settings after 1 second
-                SaveThread = new Thread(() =>
+                // Try to save settings
+                try
                 {
-                    // Try to save settings
-                    try
-                    {
-                        // Wait 1 second
-                        Thread.Sleep(1000);
-                        // Save settings
-                        SaveInternal(clean);
-                    }
-                    catch { }
-                });
+                    // Wait 1 second
+                    Thread.Sleep(1000);
+                    // Save settings
+                    SaveInternal(clean);
+                }
+                catch { }
+            });
 
-                // Start thread
-                SaveThread.Start();
+            // Start thread
+            SaveThread.Start();
 
-                return true;
-            }
+            return true;
+        }
+
+
+        public static bool Save(bool clean = true, bool delay = false)
+        {
+            // Abort previous save (if any)
+            AbortSave();
 
             return SaveInternal(clean);
         }
