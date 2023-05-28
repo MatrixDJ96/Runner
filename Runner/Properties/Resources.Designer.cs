@@ -59,5 +59,15 @@ namespace Runner.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Byte[].
+        /// </summary>
+        internal static byte[] Newtonsoft_Json {
+            get {
+                object obj = ResourceManager.GetObject("Newtonsoft.Json", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

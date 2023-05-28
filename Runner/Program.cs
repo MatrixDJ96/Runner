@@ -39,6 +39,9 @@ namespace Runner
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            // Initialize runtime loader
+            RuntimeLoader.Initialize();
+
             // Load settings
             if (!Settings.Load())
             {

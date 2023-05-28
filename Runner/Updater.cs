@@ -1,18 +1,29 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using System;
 using System.IO;
 using System.Net;
 using System.Text;
-using System.Web.Script.Serialization;
 
 namespace Runner
 {
+    [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
+    internal class Asset
+    {
+        public string Name { get; set; } = null;
+        public string BrowserDownloadUrl { get; set; } = null;
+    }
+
+    [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
+    internal class Release
+    {
+        public string TagName { get; set; } = null;
+        public Asset[] Assets { get; set; } = null;
+    }
+
     internal class Updater
     {
         public WebClient Client { get; private set; } = null;
-
-        public JavaScriptSerializer Serializer { get; private set; } = new JavaScriptSerializer();
 
         public readonly string RepositoryUrl = "https://api.github.com/repos/MatrixDJ96/Runner";
 
@@ -39,42 +50,6 @@ namespace Runner
             Client.Headers[HttpRequestHeader.UserAgent] = UserAgent;
 
             Client.DownloadProgressChanged += DownloadProgressChanged;
-        }
-
-        private string GetDownloadUrl(object rawAssets, out string filename)
-        {
-            filename = null;
-
-            try
-            {
-                // Try to decode assets list with correct type
-                if (rawAssets is ArrayList list && list[0] is Dictionary<string, object> assets)
-                {
-                    // Try to decode asset name
-                    if (assets.TryGetValue("name", out var rawName) && rawName is string name)
-                    {
-                        // Check if asset name correspond to executable name (using git version)
-                        if (Path.GetFileNameWithoutExtension(name).StartsWith(Program.ExecutableName))
-                        {
-                            // Check if asset is and executable
-                            if (Path.GetExtension(name).ToLower() == ".exe")
-                            {
-                                // Try to decode asset download url
-                                if (assets.TryGetValue("browser_download_url", out var rawDownloadUrl))
-                                {
-                                    // Set filename
-                                    filename = name;
-                                    // Return download url
-                                    return rawDownloadUrl as string;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            catch { }
-
-            return null;
         }
 
         private string DownloadString(string url)
@@ -185,34 +160,38 @@ namespace Runner
                 // Download data from GitHub
                 var content = DownloadString(RepositoryUrl + "/releases/latest");
 
-                // Convert received data
-                var json = Serializer.Deserialize<Dictionary<string, object>>(content);
+                // Convert received data into object
+                var release = JsonConvert.DeserializeObject<Release>(content);
 
-                json.TryGetValue("tag_name", out var rawTagName);
-                json.TryGetValue("assets", out var rawAssets);
-
-                if (rawTagName != null && rawAssets != null)
+                if (release.TagName != null && release.Assets != null)
                 {
                     var lastVersion = new Version(
-                        rawTagName.ToString().Substring(1)
+                        release.TagName.Substring(1)
                     );
 
                     // Compare current version with git
                     if (lastVersion > Program.ExecutableVersion)
                     {
-                        // Try to parse download url and filename
-                        var downloadUrl = GetDownloadUrl(rawAssets, out var filename);
-
-                        if (downloadUrl != null)
+                        foreach (var asset in release.Assets)
                         {
-                            // Listen download complete event
-                            Client.DownloadDataCompleted += (s, e) => OnDownloadUpdateCompleted(s, e, filename, lastVersion);
+                            // Check if asset name correspond to executable name (using git version)
+                            if (Path.GetFileNameWithoutExtension(asset.Name).StartsWith(Program.ExecutableName))
+                            {
+                                // Check if asset is and executable
+                                if (Path.GetExtension(asset.Name).ToLower() == ".exe")
+                                {
+                                    // Listen download complete event
+                                    Client.DownloadDataCompleted += (s, e) => OnDownloadUpdateCompleted(s, e, asset.Name, lastVersion);
 
-                            // Start download update
-                            DownloadFileAsync(downloadUrl);
+                                    // Start download update
+                                    DownloadFileAsync(asset.BrowserDownloadUrl);
 
-                            // Set as update ok
-                            result = true;
+                                    // Set as update ok
+                                    result = true;
+
+                                    break;
+                                }
+                            }
                         }
                     }
                     else
