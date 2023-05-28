@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace Runner
 {
-    public partial class BaseForm : Form
+    public class BaseForm : Form
     {
         public BaseForm()
         {
@@ -30,5 +30,7 @@ namespace Runner
                 ScaleFontControl(item, control);
             }
         }
+
+        protected virtual void InitializeComponent() { }
     }
 }
