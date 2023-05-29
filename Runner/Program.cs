@@ -1,3 +1,5 @@
+using Runner.Forms;
+using Runner.Utils;
 using System;
 using System.Drawing;
 using System.IO;
@@ -39,15 +41,11 @@ namespace Runner
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            // Initialize runtime loader
-            RuntimeLoader.Initialize();
+            // Initialize loader
+            Loader.Initialize();
 
             // Load settings
-            if (!Settings.Load())
-            {
-                // Warn about error loading settings
-                MessageBox.Show("Errore caricamento impostazioni", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            Settings.Load();
 
             // Start updater form
             Application.Run(new UpdaterForm());
