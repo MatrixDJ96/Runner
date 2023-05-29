@@ -22,20 +22,6 @@ namespace Runner.Forms
             Updater.DownloadProgressChanged += Updater_DownloadProgressChanged;
         }
 
-        private void CloseWhenVisible()
-        {
-            if (!Visible)
-            {
-                // Close form when visible changed
-                VisibleChanged += (s, _) => Close();
-            }
-            else
-            {
-                // Close form
-                Close();
-            }
-        }
-
         private void UpdaterForm_Load(object sender, EventArgs e)
         {
             if (Settings.Version < Program.ExecutableVersion)
@@ -53,7 +39,7 @@ namespace Runner.Forms
                 MessageBox.Show("Impossibile verificare aggiornamenti...", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 // Close form
-                CloseWhenVisible();
+                Close();
             }
         }
 
@@ -93,7 +79,7 @@ namespace Runner.Forms
             }
 
             // Close form
-            CloseWhenVisible();
+            Close();
         }
 
         private void Updater_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
@@ -107,7 +93,7 @@ namespace Runner.Forms
             Updater.Cancel();
 
             // Close form
-            CloseWhenVisible();
+            Close();
         }
     }
 }
