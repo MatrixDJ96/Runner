@@ -63,6 +63,36 @@ namespace Runner.Properties {
         /// <summary>
         ///   Cerca una risorsa localizzata di tipo System.Byte[].
         /// </summary>
+        internal static byte[] MaterialDesignColors {
+            get {
+                object obj = ResourceManager.GetObject("MaterialDesignColors", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Byte[].
+        /// </summary>
+        internal static byte[] MaterialDesignThemes {
+            get {
+                object obj = ResourceManager.GetObject("MaterialDesignThemes", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Byte[].
+        /// </summary>
+        internal static byte[] Microsoft_Xaml_Behaviors {
+            get {
+                object obj = ResourceManager.GetObject("Microsoft.Xaml.Behaviors", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Byte[].
+        /// </summary>
         internal static byte[] Newtonsoft_Json {
             get {
                 object obj = ResourceManager.GetObject("Newtonsoft.Json", resourceCulture);

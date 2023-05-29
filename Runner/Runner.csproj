@@ -55,6 +55,21 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="MaterialDesignColors, Version=2.1.4.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Resources\MaterialDesignColors.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MaterialDesignThemes, Version=4.9.0.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Resources\MaterialDesignThemes.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Resources\Microsoft.Xaml.Behaviors.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Resources\Newtonsoft.Json.dll</HintPath>
@@ -160,6 +175,9 @@
     <None Include="App.manifest" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\MaterialDesignColors.dll" />
+    <None Include="Resources\MaterialDesignThemes.dll" />
+    <None Include="Resources\Microsoft.Xaml.Behaviors.dll" />
     <None Include="Resources\Newtonsoft.Json.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

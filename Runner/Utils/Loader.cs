@@ -32,6 +32,15 @@ namespace Runner.Utils
                 // Load assembly from resources
                 switch (assemblyChunks[0])
                 {
+                    case "MaterialDesignColors":
+                        assembly = Assembly.Load(Resources.MaterialDesignColors);
+                        break;
+                    case "MaterialDesignThemes.Wpf":
+                        assembly = Assembly.Load(Resources.MaterialDesignThemes);
+                        break;
+                    case "Microsoft.Xaml.Behaviors":
+                        assembly = Assembly.Load(Resources.Microsoft_Xaml_Behaviors);
+                        break;
                     case "Newtonsoft.Json":
                         assembly = Assembly.Load(Resources.Newtonsoft_Json);
                         break;
