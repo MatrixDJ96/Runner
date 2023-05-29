@@ -1,19 +1,25 @@
-using Runner.Events;
+﻿using Runner.Events;
 using Runner.Utils;
 using System;
 using System.Diagnostics;
 using System.Net;
-using System.Windows.Forms;
+using System.Windows;
 
-namespace Runner.Forms
+namespace Runner.Windows
 {
-    public partial class UpdaterForm : BaseForm
+    /// <summary>
+    /// Logica di interazione per UpdaterWindow.xaml
+    /// </summary>
+    public partial class UpdaterWindow : Window
     {
         private Updater Updater { get; set; } = new Updater();
+
         private Utils.Runner Runner { get; set; } = new Utils.Runner();
 
-        public UpdaterForm()
+        public UpdaterWindow()
         {
+            InitializeComponent();
+
             // Set event listener
             Updater.DownloadCompleted += (s, e) => Hide();
             Updater.DownloadCompleted += Updater_DownloadCompleted;
@@ -22,11 +28,11 @@ namespace Runner.Forms
             Updater.DownloadProgressChanged += Updater_DownloadProgressChanged;
         }
 
-        private void UpdaterForm_Load(object sender, EventArgs e)
+        private void UpdaterWindow_Loaded(object sender, EventArgs e)
         {
             if (Settings.Version < Program.ExecutableVersion)
             {
-                MessageBox.Show("Software aggiornato alla versione \"" + Program.ExecutableVersion + "\"!", "Aggiornamento", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Software aggiornato alla versione \"" + Program.ExecutableVersion + "\"!", "Aggiornamento", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 // Update current version
                 Settings.Version = Program.ExecutableVersion;
@@ -36,7 +42,7 @@ namespace Runner.Forms
 
             if (!Updater.Update())
             {
-                MessageBox.Show("Impossibile verificare aggiornamenti...", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Impossibile verificare aggiornamenti...", "Attenzione", MessageBoxButton.OK, MessageBoxImage.Warning);
 
                 // Close form
                 Close();
@@ -63,7 +69,7 @@ namespace Runner.Forms
                     else
                     {
                         var error = Environment.NewLine + Environment.NewLine + Runner.LastError;
-                        MessageBox.Show(("Impossibile avviare nuova versione!" + error).Trim(), "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(("Impossibile avviare nuova versione!" + error).Trim(), "Errore", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 catch (Exception ex)
@@ -75,7 +81,7 @@ namespace Runner.Forms
             if (e.Error != null)
             {
                 var error = Environment.NewLine + Environment.NewLine + e.Error.Message;
-                MessageBox.Show(("Errore scaricamento nuova versione!" + error).Trim(), "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(("Errore scaricamento nuova versione!" + error).Trim(), "Errore", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             // Close form

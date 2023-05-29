@@ -44,15 +44,9 @@
 		</application>
 	</compatibility>
 
-	<!-- Indica che l'applicazione è sensibile ai valori DPI e non verrà scalata automaticamente da Windows in caso di
-       valori DPI maggiori. Le applicazioni Windows Presentation Foundation (WPF) sono automaticamente sensibili ai valori DPI, pertanto non è necessario 
-       acconsentire esplicitamente. Con le applicazioni Windows Forms destinate a .NET Framework 4.6 per cui è stato acconsentito esplicitamente a questa impostazione, 
-       è anche necessario impostare 'EnableWindowsFormsHighDpiAutoResizing' su 'true' nel relativo file app.config. 
-       
-       Imposta l'applicazione in modo riconosca i percorsi lunghi. Vedere https://docs.microsoft.com/windows/win32/fileio/maximum-file-path-limitation -->
+	<!-- Imposta l'applicazione in modo riconosca i percorsi lunghi. Vedere https://docs.microsoft.com/windows/win32/fileio/maximum-file-path-limitation -->
 	<application xmlns="urn:schemas-microsoft-com:asm.v3">
 		<windowsSettings>
-			<dpiAwareness xmlns="http://schemas.microsoft.com/SMI/2016/WindowsSettings">PerMonitorV2</dpiAwareness>
 			<longPathAware xmlns="http://schemas.microsoft.com/SMI/2016/WindowsSettings">true</longPathAware>
 		</windowsSettings>
 	</application>

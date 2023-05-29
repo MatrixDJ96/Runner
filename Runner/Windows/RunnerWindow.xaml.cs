@@ -1,21 +1,26 @@
-using Runner.Events;
+﻿using Runner.Events;
 using Runner.Extensions;
 using System;
-using System.Drawing;
-using System.Windows.Forms;
+using System.Windows;
+using System.Windows.Interop;
 
-namespace Runner.Forms
+namespace Runner.Windows
 {
-    public partial class RunnerForm : BaseForm
+    /// <summary>
+    /// Logica di interazione per RunnerWindow.xaml
+    /// </summary>
+    public partial class RunnerWindow : Window
     {
         private string DefaultExecutableText { get; set; } = "";
 
-        private SettingsForm SettingsForm { get; set; } = new SettingsForm();
+        private SettingsWindow SettingsWindow => new SettingsWindow();
 
         private Utils.Runner Runner { get; set; } = new Utils.Runner();
 
-        public RunnerForm()
+        public RunnerWindow()
         {
+            InitializeComponent();
+
 #if DEBUG
             // Update counter text on counter increased
             Settings.CounterIncreased += (s, e) => UpdateComponents();
@@ -33,45 +38,45 @@ namespace Runner.Forms
             Runner.OutputDataReceived += (s, e) => Process_Output(s, e, false);
 
             // Set default text of file to execute label
-            DefaultExecutableText = SettingsButton.Text;
+            DefaultExecutableText = SettingsButton.Content.ToString();
 
             // Add version on form title
-            Text += " v" + Program.ExecutableVersion;
+            Title += " v" + Program.ExecutableVersion;
         }
 
         private void UpdateComponents()
         {
-            if (InvokeRequired)
+            if (!(Dispatcher.CheckAccess()))
             {
                 // Invoke correct thread to update gui
-                Invoke((MethodInvoker)delegate { this?.UpdateComponents(); });
+                Dispatcher.Invoke(() => UpdateComponents());
 
                 return;
             }
 
             // Update start and stop button
-            StartButton.Enabled = !Settings.Executable.IsEmpty() && !Runner.IsRunning;
-            StopButton.Enabled = !Settings.Executable.IsEmpty() && Runner.IsRunning;
+            StartButton.IsEnabled = !Settings.Executable.IsEmpty() && !Runner.IsRunning;
+            StopButton.IsEnabled = !Settings.Executable.IsEmpty() && Runner.IsRunning;
 
             // Update file to execute label
-            SettingsButton.Text = !Settings.Executable.IsEmpty() ? Settings.FullExecutable : DefaultExecutableText;
-            SettingsButton.Enabled = Settings.Executable.IsEmpty() || StartButton.Enabled;
+            SettingsButton.Content = !Settings.Executable.IsEmpty() ? Settings.FullExecutable : DefaultExecutableText;
+            SettingsButton.IsEnabled = Settings.Executable.IsEmpty() || StartButton.IsEnabled;
 
 #if DEBUG
             // Update counter text with counter value
             CounterText.Text = Settings.Counter != 0 ? "Salvataggi: " + Settings.Counter.ToString() : "";
 #else
             // Hide counter text
-            CounterText.Visible = false;
+            CounterText.Visibility = Visibility.Collapsed;
 #endif
         }
 
         private void UpdateOutputText(bool clean, string output = null, bool error = false)
         {
-            if (InvokeRequired)
+            if (!(Dispatcher.CheckAccess()))
             {
                 // Invoke correct thread to update gui
-                Invoke((MethodInvoker)delegate { this?.UpdateOutputText(clean, output, error); });
+                Dispatcher.Invoke(() => UpdateOutputText(clean, output, error));
 
                 return;
             }
@@ -81,12 +86,12 @@ namespace Runner.Forms
                 if (error)
                 {
                     // Clean previous error
-                    ErrorTextBox.Clear();
+                    ErrorTextBox.Inlines.Clear();
                 }
                 else
                 {
                     // Clean previous output
-                    OutputTextBox.Clear();
+                    OutputTextBox.Inlines.Clear();
                 }
             }
 
@@ -94,29 +99,29 @@ namespace Runner.Forms
             {
                 if (error)
                 {
-                    // Set focus
-                    ErrorTextBox.Focus();
                     // Append new error
-                    ErrorTextBox.AppendText(output);
+                    ErrorTextBox.Inlines.Add(output);
+                    // Scroll to end
+                    ErrorRichTextBox.ScrollToEnd();
                     // Enable error button
-                    ErrorButton.Enabled = true;
+                    ErrorButton.IsEnabled = true;
                 }
                 else
                 {
-                    // Set focus
-                    OutputTextBox.Focus();
                     // Append new output
-                    OutputTextBox.AppendText(output);
+                    OutputTextBox.Inlines.Add(output);
+                    // Scroll to end
+                    OutputRichTextBox.ScrollToEnd();
                 }
             }
         }
 
         private void ShowOutputText(bool show, bool button = false)
         {
-            if (InvokeRequired)
+            if (!(Dispatcher.CheckAccess()))
             {
                 // Invoke correct thread to update gui
-                Invoke((MethodInvoker)delegate { this?.UpdateComponents(); });
+                Dispatcher.Invoke(() => ShowOutputText(show, button));
 
                 return;
             }
@@ -124,22 +129,24 @@ namespace Runner.Forms
             if (show)
             {
                 // Change button label
-                ErrorButton.Text = ErrorButton.Text.Replace("Nascondi", "Mostra");
+                ErrorButton.Content = ErrorButton.Content.ToString().Replace("Nascondi", "Mostra");
                 // Show output text box
-                OutputTextBox.BringToFront();
+                OutputRichTextBox.Visibility = Visibility.Visible;
+                ErrorRichTextBox.Visibility = Visibility.Collapsed;
             }
             else
             {
                 // Change button label
-                ErrorButton.Text = ErrorButton.Text.Replace("Mostra", "Nascondi");
+                ErrorButton.Content = ErrorButton.Content.ToString().Replace("Mostra", "Nascondi");
                 // Show error text box
-                ErrorTextBox.BringToFront();
+                ErrorRichTextBox.Visibility = Visibility.Visible;
+                OutputRichTextBox.Visibility = Visibility.Collapsed;
             }
 
             if (button)
             {
                 // Disable error button
-                ErrorButton.Enabled = false;
+                ErrorButton.IsEnabled = false;
             }
         }
 
@@ -148,7 +155,7 @@ namespace Runner.Forms
             UpdateComponents();
             // Clean error text box
             UpdateOutputText(clean, error: true);
-            // Clean output textr box
+            // Clean output text box
             UpdateOutputText(clean, error: false);
         }
 
@@ -163,54 +170,69 @@ namespace Runner.Forms
             UpdateOutputText(false, e.Output, error);
         }
 
-        private void RunnerForm_Load(object sender, EventArgs e)
+        private void RunnerWindow_Loaded(object sender, EventArgs e)
         {
             if (!Settings.FirstRun)
             {
                 // Apply saved location
-                Location = new Point(
-                    Settings.LocationX * DeviceDpi / 96,
-                    Settings.LocationY * DeviceDpi / 96
-                );
+                Left = Settings.LocationX;
+                Top = Settings.LocationY;
 
                 // Apply saved size
-                Size = new Size(
-                    Settings.SizeWidth * DeviceDpi / 96,
-                    Settings.SizeHeight * DeviceDpi / 96
-                );
+                Width = Settings.SizeWidth;
+                Height = Settings.SizeHeight;
             }
             else
             {
                 // Set first run to false
                 Settings.FirstRun = false;
                 // Save current size and position
-                RunnerForm_ResizeEnd(sender, e);
+                SaveCurrentSizeAndPosition();
             }
 
-            // Set app in foreground 
+            // Set app in foreground
             Activate();
 
             // Update GUI
             UpdateComponents();
             UpdateOutputText(true);
             ShowOutputText(true, true);
+
+            // Set windows events
+            HwndSource.FromHwnd(new WindowInteropHelper(this).Handle).AddHook(WindowProc);
         }
 
-        private void RunnerForm_ResizeBegin(object sender, EventArgs e)
+        private IntPtr WindowProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
-            // Stop settings save
-            Settings.AbortSave();
+            switch (msg)
+            {
+                case 0x0231: // WM_ENTERSIZEMOVE
+                    if (Settings.IsSaving)
+                    {
+                        // Abort save settings
+                        Settings.AbortSave();
+                    }
+                    handled = true;
+                    break;
+                case 0x0232: // WM_EXITSIZEMOVE
+                    // Save current size and position
+                    SaveCurrentSizeAndPosition();
+                    handled = true;
+                    break;
+            }
+
+            return IntPtr.Zero;
         }
 
-        private void RunnerForm_ResizeEnd(object sender, EventArgs e)
+        private void SaveCurrentSizeAndPosition()
         {
             // Get form size
-            Settings.SizeWidth = Size.Width * 96 / DeviceDpi;
-            Settings.SizeHeight = Size.Height * 96 / DeviceDpi;
+            Settings.SizeWidth = (int)Width;
+            Settings.SizeHeight = (int)Height;
 
             // Get form location
-            Settings.LocationX = Location.X * 96 / DeviceDpi;
-            Settings.LocationY = Location.Y * 96 / DeviceDpi;
+            Settings.LocationX = (int)Left;
+            Settings.LocationY = (int)Top;
 
             // Start save settings
             Settings.StartSave();
@@ -219,7 +241,7 @@ namespace Runner.Forms
         private void SettingsButton_Click(object sender, EventArgs e)
         {
             // Select new file to execute
-            if (SettingsForm.ShowDialog(this) == DialogResult.OK)
+            if (SettingsWindow.ShowDialog() == true)
             {
                 UpdateComponents();
             }
@@ -240,7 +262,7 @@ namespace Runner.Forms
                     if (!Runner.Start())
                     {
                         var error = Environment.NewLine + Environment.NewLine + Runner.LastError;
-                        MessageBox.Show(("Impossibile avviare il processo!" + error).Trim(), "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(("Impossibile avviare il processo!" + error).Trim(), "Errore", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             }
@@ -255,17 +277,14 @@ namespace Runner.Forms
                 if (!Runner.Kill())
                 {
                     var error = Environment.NewLine + Environment.NewLine + Runner.LastError;
-                    MessageBox.Show(("Impossibile interrompere il processo!" + error).Trim(), "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(("Impossibile interrompere il processo!" + error).Trim(), "Errore", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
 
         private void ErrorButton_Click(object sender, EventArgs e)
         {
-            var outputIndex = FillPanel.Controls.GetChildIndex(OutputTextBox);
-            var errorIndex = FillPanel.Controls.GetChildIndex(ErrorTextBox);
-
-            ShowOutputText(outputIndex > errorIndex);
+            ShowOutputText(!OutputRichTextBox.IsVisible);
         }
     }
 }

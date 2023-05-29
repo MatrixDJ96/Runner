@@ -1,10 +1,7 @@
-using Runner.Forms;
 using Runner.Utils;
 using System;
-using System.Drawing;
 using System.IO;
 using System.Reflection;
-using System.Windows.Forms;
 
 namespace Runner
 {
@@ -22,9 +19,6 @@ namespace Runner
         // Full path of the current executable
         public static readonly string ExecutablePath = Assembly.GetExecutingAssembly().Location;
 
-        // Icon of the current executable
-        public static readonly Icon ExecutableIcon = Icon.ExtractAssociatedIcon(ExecutablePath);
-
         // Full path of the program settings
         public static readonly string SettingsPath = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
@@ -38,23 +32,16 @@ namespace Runner
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
             // Initialize loader
             Loader.Initialize();
 
             // Load settings
             Settings.Load();
 
-            // Start updater form
-            Application.Run(new UpdaterForm());
-
-            if (!NeedRestart)
-            {
-                // Start runner form
-                Application.Run(new RunnerForm());
-            }
+            // Start application
+            App app = new App();
+            app.InitializeComponent();
+            app.Run();
 
             // Save settings
             Settings.Save();

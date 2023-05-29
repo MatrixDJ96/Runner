@@ -1,0 +1,27 @@
+﻿<Window x:Class="Runner.Windows.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Runner"
+        mc:Ignorable="d"
+        Style="{DynamicResource BaseWindow}"
+        Title="Settings" ResizeMode="NoResize" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" Loaded="SettingsWindow_Loaded">
+    <StackPanel Margin="10,5,10,5">
+        <Grid Margin="0,0,0,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button Style="{DynamicResource BaseButton}" x:Name="ExecutableButton" Grid.Column="0" Grid.Row="0" Margin="0,0,5,5" Click="ExecutableButton_Click">Eseguibile</Button>
+            <TextBox Style="{DynamicResource BaseTextBox}" x:Name="ExecutableTextBox" Grid.Column="1" Grid.Row="0" MinWidth="200" Margin="5,0,0,5" TextChanged="ExecutableTextBox_TextChanged" VerticalAlignment="Center"></TextBox>
+            <Button Style="{DynamicResource BaseButton}" x:Name="ArgumentsButton" Grid.Column="0" Grid.Row="1" Margin="0,0,5,0" Click="ArgumentsButton_Click">Argomenti</Button>
+            <TextBox Style="{DynamicResource BaseTextBox}" x:Name="ArgumentsTextBox" Grid.Column="1" Grid.Row="1" MinWidth="200" Margin="5,0,0,0" TextChanged="ArgumentsTextBox_TextChanged" VerticalAlignment="Center"></TextBox>
+        </Grid>
+        <Button Style="{DynamicResource BaseButton}" x:Name="SaveButton" HorizontalAlignment="Left"  Margin="0,5,0,0" Click="SaveButton_Click">Salva</Button>
+    </StackPanel>
+</Window>
