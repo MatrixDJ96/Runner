@@ -1,11 +1,13 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Runner.Events;
+using Runner.Extensions;
 using System;
 using System.IO;
 using System.Net;
 using System.Text;
 
-namespace Runner
+namespace Runner.Utils
 {
     [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
     internal class Asset

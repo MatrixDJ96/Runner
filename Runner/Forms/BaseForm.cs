@@ -1,7 +1,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Runner
+namespace Runner.Forms
 {
     public class BaseForm : Form
     {

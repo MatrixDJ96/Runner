@@ -1,8 +1,10 @@
+using Runner.Events;
+using Runner.Extensions;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Runner
+namespace Runner.Forms
 {
     public partial class RunnerForm : BaseForm
     {
@@ -10,7 +12,7 @@ namespace Runner
 
         private SettingsForm SettingsForm { get; set; } = new SettingsForm();
 
-        private Runner Runner { get; set; } = new Runner();
+        private Utils.Runner Runner { get; set; } = new Utils.Runner();
 
         public RunnerForm()
         {

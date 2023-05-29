@@ -1,14 +1,16 @@
+using Runner.Events;
+using Runner.Utils;
 using System;
 using System.Diagnostics;
 using System.Net;
 using System.Windows.Forms;
 
-namespace Runner
+namespace Runner.Forms
 {
     public partial class UpdaterForm : BaseForm
     {
         private Updater Updater { get; set; } = new Updater();
-        private Runner Runner { get; set; } = new Runner();
+        private Utils.Runner Runner { get; set; } = new Utils.Runner();
 
         public UpdaterForm()
         {

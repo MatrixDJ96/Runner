@@ -1,10 +1,11 @@
+using Runner.Events;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading;
 
-namespace Runner
+namespace Runner.Utils
 {
     internal class Runner
     {
