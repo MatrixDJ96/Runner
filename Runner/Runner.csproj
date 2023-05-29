@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Runner.ico</ApplicationIcon>
+    <ApplicationIcon>App.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>App.manifest</ApplicationManifest>
@@ -59,43 +59,49 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
-    <Compile Include="Runner.cs" />
-    <Compile Include="RunnerEvent.cs" />
-    <Compile Include="RuntimeLoader.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="StringExtensions.cs" />
-    <Compile Include="Updater.cs" />
-    <Compile Include="UpdaterEvent.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseForm.cs">
+    <Compile Include="Utils\Loader.cs" />
+    <Compile Include="Utils\Runner.cs" />
+    <Compile Include="Utils\Updater.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Events\RunnerEvent.cs" />
+    <Compile Include="Events\UpdaterEvent.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Extensions\StringExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Forms\BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RunnerForm.cs">
+    <Compile Include="Forms\RunnerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RunnerForm.Designer.cs">
+    <Compile Include="Forms\RunnerForm.Designer.cs">
       <DependentUpon>RunnerForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="RunnerForm.resx">
+    <EmbeddedResource Include="Forms\RunnerForm.resx">
       <DependentUpon>RunnerForm.cs</DependentUpon>
     </EmbeddedResource>
-    <Compile Include="SettingsForm.cs">
+    <Compile Include="Forms\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SettingsForm.Designer.cs">
+    <Compile Include="Forms\SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="SettingsForm.resx">
+    <EmbeddedResource Include="Forms\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <Compile Include="UpdaterForm.cs">
+    <Compile Include="Forms\UpdaterForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UpdaterForm.Designer.cs">
+    <Compile Include="Forms\UpdaterForm.Designer.cs">
       <DependentUpon>UpdaterForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UpdaterForm.resx">
+    <EmbeddedResource Include="Forms\UpdaterForm.resx">
       <DependentUpon>UpdaterForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
@@ -123,11 +129,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Content Include="App.ico" />
     <None Include="App.manifest" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Newtonsoft.Json.dll" />
-    <Content Include="Runner.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

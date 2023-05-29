@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Runner
+namespace Runner.Utils
 {
-    internal static class RuntimeLoader
+    internal static class Loader
     {
         private static bool AssemblyHooked { get; set; } = false;
 

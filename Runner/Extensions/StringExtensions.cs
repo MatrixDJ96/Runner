@@ -1,4 +1,4 @@
-﻿namespace Runner
+﻿namespace Runner.Extensions
 {
     internal static class StringExtensions
     {

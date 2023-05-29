@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Runner
+namespace Runner.Events
 {
     internal class RunnerReceivedEventArgs : EventArgs
     {
