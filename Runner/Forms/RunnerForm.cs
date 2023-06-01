@@ -1,6 +1,7 @@
 using Runner.Events;
 using Runner.Extensions;
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -37,6 +38,14 @@ namespace Runner.Forms
 
             // Add version on form title
             Text += " v" + Program.ExecutableVersion;
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            // Stop runner
+            Runner.Kill();
+
+            base.OnClosing(e);
         }
 
         private void UpdateComponents()
