@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace Runner.Forms
@@ -7,6 +8,22 @@ namespace Runner.Forms
     {
         // Define whether the settings have been updated
         public bool Updated { get; set; } = false;
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            if (Updated)
+            {
+                // Save settings
+                Settings.Save();
+            }
+            else
+            {
+                // Restore settings
+                Settings.Load();
+            }
+
+            base.OnClosing(e);
+        }
 
         private void UpdateComponents(bool width = true)
         {
@@ -131,22 +148,6 @@ namespace Runner.Forms
 
             // Close form
             Close();
-        }
-
-        protected override void OnClosed(EventArgs e)
-        {
-            base.OnClosed(e);
-
-            if (Updated)
-            {
-                // Save settings
-                Settings.Save();
-            }
-            else
-            {
-                // Restore settings
-                Settings.Load();
-            }
         }
     }
 }
