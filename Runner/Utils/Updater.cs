@@ -178,7 +178,7 @@ namespace Runner.Utils
                         foreach (var asset in release.Assets)
                         {
                             // Check if asset name correspond to executable name (using git version)
-                            if (Path.GetFileNameWithoutExtension(asset.Name).StartsWith(Program.ExecutableName))
+                            if (Path.GetFileNameWithoutExtension(asset.Name) == $"{Program.ExecutableName}_v{lastVersion}")
                             {
                                 // Check if asset is and executable
                                 if (Path.GetExtension(asset.Name).ToLower() == ".exe")
