@@ -24,7 +24,10 @@ namespace Runner.Forms
 
         private void UpdaterForm_Load(object sender, EventArgs e)
         {
-            if (Settings.Version < Program.ExecutableVersion)
+            // Check if software is updated
+            Program.Updated = Settings.Version < Program.ExecutableVersion;
+
+            if (Program.Updated)
             {
                 MessageBox.Show("Software aggiornato alla versione \"" + Program.ExecutableVersion + "\"!", "Aggiornamento", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
