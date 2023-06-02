@@ -10,6 +10,9 @@ namespace Runner
 {
     internal static class Program
     {
+        // Indicates whether the program has been updated to a new version
+        public static bool Updated { get; set; } = false;
+
         // Indicates whether the program needs to be restarted
         public static bool NeedRestart { get; set; } = false;
 
