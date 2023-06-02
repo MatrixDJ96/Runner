@@ -9,16 +9,17 @@ using System.Text;
 
 namespace Runner.Utils
 {
-    [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
-    internal class Asset
-    {
-        public string Name { get; set; } = null;
-        public string BrowserDownloadUrl { get; set; } = null;
-    }
 
     [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
     internal class Release
     {
+        [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
+        internal class Asset
+        {
+            public string Name { get; set; } = null;
+            public string BrowserDownloadUrl { get; set; } = null;
+        }
+
         public string TagName { get; set; } = null;
         public Asset[] Assets { get; set; } = null;
     }
