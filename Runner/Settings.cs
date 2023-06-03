@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace Runner
 {
-    internal class Settings
+    internal static class Settings
     {
         // Number of times the program has saved settings
         public static int Counter { get; set; } = 0;
