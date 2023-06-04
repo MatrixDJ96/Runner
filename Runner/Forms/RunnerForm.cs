@@ -225,6 +225,42 @@ namespace Runner.Forms
             Settings.StartSave();
         }
 
+        private void RunnerForm_DragDrop(object sender, DragEventArgs e)
+        {
+            // Get dropped files from event
+            var files = e.Data.GetData(DataFormats.FileDrop) as string[];
+
+            // Check if only one file is dropped
+            if (files?.Length == 1)
+            {
+                // Set file path
+                Settings.Executable = files[0];
+                // Save settings
+                Settings.Save();
+
+                // Update GUI
+                UpdateComponents();
+            }
+        }
+
+        private void RunnerForm_DragEnter(object sender, DragEventArgs e)
+        {
+            // Get dropped files from event
+            var files = e.Data.GetData(DataFormats.FileDrop) as string[];
+
+            // Check if only one file is dropped
+            if (files?.Length == 1)
+            {
+                // Allow only one file to be dropped
+                e.Effect = DragDropEffects.Move;
+            }
+            else
+            {
+                // Deny drag and drop operation
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
         private void SettingsButton_Click(object sender, EventArgs e)
         {
             // Select new file to execute

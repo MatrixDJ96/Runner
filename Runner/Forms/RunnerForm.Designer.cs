@@ -165,6 +165,7 @@ namespace Runner.Forms
             // 
             // RunnerForm
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(800, 450);
@@ -177,6 +178,8 @@ namespace Runner.Forms
             this.Load += new System.EventHandler(this.RunnerForm_Load);
             this.ResizeBegin += new System.EventHandler(this.RunnerForm_ResizeBegin);
             this.ResizeEnd += new System.EventHandler(this.RunnerForm_ResizeEnd);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.RunnerForm_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.RunnerForm_DragEnter);
             this.TopPanel.ResumeLayout(false);
             this.TopPanel.PerformLayout();
             this.FillPanel.ResumeLayout(false);
