@@ -1,3 +1,4 @@
+using IWshRuntimeLibrary;
 using Runner.Events;
 using Runner.Extensions;
 using System;
@@ -233,8 +234,23 @@ namespace Runner.Forms
             // Check if only one file is dropped
             if (files?.Length == 1)
             {
+                // Get file path
+                var file = files[0];
+
+                try
+                {
+                    // Create shell object
+                    WshShell shell = new WshShell();
+                    // Create shortcut object
+                    WshShortcut shortcut = shell.CreateShortcut(file);
+
+                    // Get shortcut target
+                    file = shortcut.TargetPath;
+                }
+                catch { }
+
                 // Set file path
-                Settings.Executable = files[0];
+                Settings.Executable = file;
                 // Save settings
                 Settings.Save();
 
