@@ -73,6 +73,7 @@
     <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Utils\Cleaner.cs" />
     <Compile Include="Utils\Loader.cs" />
     <Compile Include="Utils\Runner.cs" />
     <Compile Include="Utils\Updater.cs" />
