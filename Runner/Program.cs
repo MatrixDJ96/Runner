@@ -4,6 +4,7 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace Runner
@@ -21,6 +22,9 @@ namespace Runner
 
         // Version of the current executable
         public static readonly Version ExecutableVersion = Assembly.GetExecutingAssembly().GetName().Version;
+
+        // GUID of the current executable
+        public static readonly string ExecutableGuid = Assembly.GetExecutingAssembly().GetCustomAttribute<GuidAttribute>().Value;
 
         // Full path of the current executable
         public static readonly string ExecutablePath = Assembly.GetExecutingAssembly().Location;
