@@ -1,6 +1,7 @@
 using IWshRuntimeLibrary;
 using Runner.Events;
 using Runner.Extensions;
+using Runner.Utils;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -43,6 +44,9 @@ namespace Runner.Forms
 
         protected override void OnClosing(CancelEventArgs e)
         {
+            // Stop cleaner
+            Cleaner.AbortClean();
+
             // Stop runner
             Runner.Kill();
 
@@ -204,6 +208,9 @@ namespace Runner.Forms
             UpdateComponents();
             UpdateOutputText(true);
             ShowOutputText(true, true);
+
+            // Start cleaner
+            Cleaner.StartClean();
         }
 
         private void RunnerForm_ResizeBegin(object sender, EventArgs e)
