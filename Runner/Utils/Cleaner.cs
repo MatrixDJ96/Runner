@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -25,10 +26,10 @@ namespace Runner.Utils
 
         public static bool StartClean()
         {
-            // Abort previous save (if any)
+            // Abort previous clean (if any)
             AbortClean();
 
-            // Thread to save settings after 1 second
+            // Thread to clean files
             CleanThread = new Thread(() =>
             {
                 // Try to clean files
@@ -48,31 +49,53 @@ namespace Runner.Utils
 
         internal static void CleanInternal()
         {
-            var entries = Directory.GetFileSystemEntries(
-                Path.GetDirectoryName(Program.ExecutablePath), "*.old", SearchOption.AllDirectories
-            );
+            // List of files to delete
+            var result = new List<string> { };
 
-            foreach (var entry in entries)
+            try
+            {
+                // Create new domain to load assembly
+                var domain = AppDomain.CreateDomain("cleaner");
+
+                // Get all files with .old extension
+                var entries = Directory.GetFileSystemEntries(
+                    Path.GetDirectoryName(Program.ExecutablePath), "*.old", SearchOption.TopDirectoryOnly
+                );
+
+                foreach (var entry in entries)
+                {
+                    try
+                    {
+                        // Load assembly from file using new domain
+                        var assembly = domain.Load(new AssemblyName { CodeBase = entry });
+
+                        // Try to load GUID of the loaded assembly 
+                        var guid = assembly?.GetCustomAttribute<GuidAttribute>();
+
+                        // Check if GUID is the same of the current executable
+                        if (guid?.Value == Program.ExecutableGuid)
+                        {
+                            // Add file to delete list
+                            result.Add(entry);
+                        }
+                    }
+                    catch { }
+                }
+
+                // Unload domain to release files
+                AppDomain.Unload(domain);
+
+            }
+            catch { }
+
+            // Delete old backup files
+            foreach (var entry in result)
             {
                 try
                 {
-                    // Load assembly from file 
-                    var assembly = Assembly.LoadFrom(entry);
-
-                    // Get GUID of the assembly (if any)
-                    var guid = assembly?.GetCustomAttribute<GuidAttribute>();
-
-                    // Check if GUID is the same of the current executable
-                    if (guid?.Value == Program.ExecutableGuid)
-                    {
-                        // Delete old backup file
-                        File.Delete(entry);
-                    }
+                    File.Delete(entry);
                 }
-                catch (Exception)
-                {
-                    // Ignore
-                }
+                catch { }
             }
         }
     }
